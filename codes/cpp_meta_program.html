@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>c++ meta program</title>
+  <style>
+    body,
+    html {
+      background-color: #272822;
+      padding: 0;
+      margin: 0;
+      position: relative;
+    }
+
+    li {
+      color: white;
+    }
+
+    li p {
+      margin: 15px 8px;
+      max-width: 100%;
+      min-height: 1em;
+      letter-spacing: 0.544px;
+      color: rgb(245, 240, 240);
+      font-size: 16px;
+      widows: 1;
+      line-height: 1.75em;
+      box-sizing: border-box !important;
+      overflow-wrap: break-word !important;
+    }
+
+    p {
+      margin: 15px 8px;
+      max-width: 100%;
+      min-height: 1em;
+      letter-spacing: 0.544px;
+      white-space: normal;
+      background-color: rgb(39, 40, 34);
+      color: rgb(245, 240, 240);
+      font-size: 16px;
+      widows: 1;
+      line-height: 1.75em;
+      box-sizing: border-box !important;
+      overflow-wrap: break-word !important;
+    }
+
+    section {
+      max-width: 100%;
+      white-space: normal;
+      background-color: rgb(41, 43, 45);
+      font-size: 16px;
+      color: rgb(245, 240, 240);
+      line-height: 1.6;
+      letter-spacing: 0px;
+      font-family:
+        Helvetica Neue,
+        Helvetica,
+        Hiragino Sans GB,
+        Microsoft YaHei,
+        Arial,
+        sans-serif;
+      box-sizing: border-box !important;
+      overflow-wrap: break-word !important;
+    }
+
+    pre {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding: 0px;
+      max-width: 100%;
+      font-size: inherit;
+      color: inherit;
+      line-height: inherit;
+      box-sizing: border-box !important;
+      overflow-wrap: break-word !important;
+    }
+
+    code {
+      margin-right: 2px;
+      margin-left: 2px;
+      padding: 0.5em;
+      max-width: 100%;
+      line-height: 18px;
+      font-size: 14px;
+      letter-spacing: 0px;
+      font-family: Consolas, Inconsolata, Courier, monospace;
+      border-radius: 0px;
+      color: rgb(169, 183, 198);
+      background: rgb(50, 53, 55);
+      box-sizing: border-box !important;
+      overflow-wrap: normal !important;
+      display: block !important;
+      word-break: normal !important;
+      overflow: auto !important;
+    }
+
+    .text {
+      max-width: 100%;
+      font-size: 15px;
+      letter-spacing: 0.544px;
+      color: rgb(245, 240, 240);
+      box-sizing: border-box !important;
+      overflow-wrap: break-word !important;
+    }
+
+    .title_1 {
+      margin: 15px 8px;
+      max-width: 100%;
+      min-height: 1em;
+      letter-spacing: 0.544px;
+      white-space: normal;
+      background-color: rgb(39, 40, 34);
+      color: rgb(255, 0, 0);
+      font-size: 15px;
+      widows: 1;
+      line-height: 1.75em;
+      text-align: center;
+      box-sizing: border-box !important;
+      overflow-wrap: break-word !important;
+    }
+
+    .title_2 {
+      max-width: 100%;
+      font-size: 17px;
+      color: rgb(253, 180, 45);
+      box-sizing: border-box !important;
+      overflow-wrap: break-word !important;
+      font-size: 15px;
+      max-width: 100%;
+      letter-spacing: 0.544px;
+      box-sizing: border-box !important;
+      overflow-wrap: break-word !important;
+    }
+
+    .cpp_keyword {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(248, 35, 117);
+      box-sizing: border-box !important;
+      overflow-wrap: inherit !important;
+      word-break: inherit !important;
+    }
+
+    .cpp_keyword_class {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(248, 35, 117);
+    }
+
+    .cpp_type_custom {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(165, 218, 45);
+    }
+
+    .cpp_operator {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(255, 152, 35);
+    }
+
+    .cpp_literals {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(174, 135, 250);
+      box-sizing: border-box !important;
+      overflow-wrap: inherit !important;
+      word-break: inherit !important;
+    }
+
+    .cpp_comment {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(128, 128, 128);
+      box-sizing: border-box !important;
+      overflow-wrap: inherit !important;
+      word-break: inherit !important;
+    }
+
+    .cpp_text {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(238, 220, 112);
+      box-sizing: border-box !important;
+      overflow-wrap: inherit !important;
+      word-break: inherit !important;
+    }
+
+    .cpp_type_builtin {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .cpp_mem_func_call {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(165, 218, 45);
+      box-sizing: border-box !important;
+      overflow-wrap: inherit !important;
+      word-break: inherit !important;
+    }
+
+    .cpp_operator_stream {
+      max-width: 100%;
+      font-size: inherit;
+      color: inherit;
+      line-height: inherit;
+    }
+
+    .cpp_operator_hashtag {
+      max-width: 100%;
+      font-size: inherit;
+      line-height: inherit;
+      color: rgb(91, 218, 237);
+      box-sizing: border-box !important;
+      overflow-wrap: inherit !important;
+      word-break: inherit !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="img-content">
+    <h2 class="rich_media_title" id="activity-name" style="color: rgb(205, 236, 184);">
+      从 C++98 到 C++17，元编程是如何演进的？
+    </h2>
+    <div class="rich_media_content " id="js_content">
+      <p>
+        <span class="text">不断出现的C++新的标准，正在改变元编程的编程思想，新的idea和方法不断涌现，让元编程变得越来越简单，让C++变得简单也是C++未来的一个趋势。</span>
+      </p>
+      <p>
+        <span
+          class="text">很多人对元编程有一些误解，认为代码晦涩难懂，编译错误提示很糟糕，还会让编译时间变长，对元编程有一种厌恶感。不可否认，元编程确实有这样或那样的缺点，但是它同时也有非常鲜明的优点：</span>
+      </p>
+      <ul class="list-paddingleft-2" style="">
+        <li>
+          <p>
+            <span class="text">zero-overhead的编译期计算；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">简洁而优雅地解决问题；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">终极抽象。</span>
+          </p>
+        </li>
+      </ul>
+      <p>
+        <span class="text">在我看来元编程最大的魅力是它常常能化腐朽为神奇，帮我们写出dream
+          code！</span></p>
+      <p>
+        <span class="text"><br></span>
+      </p>
+      <p class="title_1">
+        <span><strong><span>C++98模版元编程思想</span></strong></span>
+      </p>
+      <p>
+        <br></p>
+      <p>
+        <span class="text">C++98中的模版元编程通常和这些特性和方法有关：</span>
+      </p>
+      <ul class="list-paddingleft-2" style="">
+        <li>
+          <p>
+            <span class="text">元函数；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">SFINAE；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">模版递归；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">递归继承；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">Tag
+              Dispatch；</span></p>
+        </li>
+        <li>
+          <p>
+            <span class="text">模版特化/偏特化。</span>
+          </p>
+        </li>
+      </ul>
+      <p class="title_2">
+        <span><strong><span>元函数</span></strong></span>
+      </p>
+      <p>
+        <span class="text">元函数就是编译期函数调用的类或模版类。比如下面这个例子：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>&gt;&nbsp;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">add_pointer</span>&nbsp;{</span>&nbsp;<span class="cpp_keyword">typedef</span>&nbsp;T*&nbsp;type;&nbsp;};<br/><br/><span class="cpp_keyword">typedef</span>&nbsp;<span class="cpp_keyword">typename</span>&nbsp;add_pointer&lt;<span class="cpp_keyword">int</span>&gt;::type&nbsp;int_pointer;</code></pre>
+      </section>
+      <p>
+        <span class="text">addpointer就是一个元函数（模版类），元函数的调用是通过访问其sub-type实现的，比如addpointer::type就是调用add_pointer元函数了。</span>
+      </p>
+      <p>
+        <span
+          class="text">这里面类型T作为元函数的value，类型是元编程中的一等公民。模版元编程概念上是函数式编程，对应于一个普通函数，值作为参数传给函数，在模版元里，类型作为元函数的参数被传来传去。</span>
+      </p>
+      <p class="title_2">
+        <span><strong><span>SFINAE</span></strong></span>
+      </p>
+      <p>
+        <span class="text">替换失败不是错误。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">bool</span>&nbsp;B,&nbsp;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>&nbsp;=&nbsp;<span class="cpp_type_custom">void</span>&gt;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">enable_if</span>&nbsp;{</span>};<br/><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>&gt;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">enable_if</span>&lt;true,&nbsp;T&gt;&nbsp;{</span>&nbsp;<span class="cpp_keyword">typedef</span>&nbsp;T&nbsp;type;&nbsp;};<br/><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>&gt;<br/><span class="cpp_type_custom">typename</span>&nbsp;<span class="cpp_type_custom">enable_if</span>&lt;sizeof(T)==4,&nbsp;void&gt;:</span>:<span class="cpp_keyword">type<br/><span class="cpp_type_custom">foo</span><span class="cpp_operator">(T&nbsp;&nbsp;t)</span>&nbsp;</span>{}<br/><br/>foo(<span class="cpp_literals">1</span>);&nbsp;&nbsp;<span class="cpp_comment">//ok</span><br/>foo(<span class="cpp_text">'a'</span>);&nbsp;<span class="cpp_comment">//compile&nbsp;error</span></code></pre>
+      </section>
+      <p>
+        <span
+          class="text">在上面的例子中，调用foo('a')模版函数的时候，有一个模版实例化的过程，这个过程中会替换模版参数，如果模版参数替换失败，比如不符合编译期的某个条件，那么这个模版实例化会失败，但是这时候编译器不认为这是一个错误，还会继续寻找其他的替换方案，直到所有的都失败时才会产生编译错误，这就是SFINAE。SFINAE实际上是一种编译期的选择，不断去选择直到选择到一个合适的版本位置，其实它也可以认为是基于模板实例化的tag
+          dispatch。</span></p>
+      <p class="title_2">
+        <span><strong><span>模版递归，模版特化</span></strong></span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">int</span>&nbsp;n&gt;&nbsp;<span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">fact98</span>&nbsp;{</span><br/>&nbsp;&nbsp;<span class="cpp_keyword">static</span>&nbsp;<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">int</span>&nbsp;value&nbsp;=&nbsp;n&nbsp;*&nbsp;fact98&lt;n&nbsp;-&nbsp;<span class="cpp_literals">1</span>&gt;::value;<br/>};<br/><span class="cpp_keyword">template</span>&nbsp;&lt;&gt;&nbsp;<span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">fact98</span>&lt;0&gt;&nbsp;{</span><br/>&nbsp;&nbsp;<span class="cpp_keyword">static</span>&nbsp;<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">int</span>&nbsp;value&nbsp;=&nbsp;<span class="cpp_literals">1</span>;<br/>};<br/><span class="cpp_keyword">std</span>::<span class="cpp_keyword">cout</span>&nbsp;&lt;&lt;&nbsp;fact98&lt;<span class="cpp_literals">5</span>&gt;::value&nbsp;&lt;&lt;&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">endl</span>;</code></pre>
+      </section>
+      <p>
+        <span class="text">这是模版元编程的hello
+          world例子，通过模版特化和模版递归实现编译期计算。</span></p>
+      <p>
+        <span
+          class="text">在C++98中模版元编程的集大成者的库是boost.mpl和boost.fusion，boost.mpl主要提供了编译期类型容器和算法，boost.fusion通过异构的编译期容器融合编译期和运行期计算。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">print</span>{</span><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T&gt;<br/>&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">operator</span><span class="cpp_operator">()(T&nbsp;<span class="cpp_keyword">const</span>&amp;&nbsp;x)</span>&nbsp;<span class="cpp_type_builtin">const</span></span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">cout</span>&nbsp;&lt;&lt;&nbsp;<span class="cpp_keyword">typeid</span>(x).name()&nbsp;&lt;&lt;&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">endl</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>};<br/><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;Sequence&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">print_names</span><span class="cpp_operator">(Sequence&nbsp;<span class="cpp_keyword">const</span>&amp;&nbsp;seq)</span></span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;for_each(filter_if&lt;boost::is_class&lt;_&gt;&nbsp;&gt;(seq),&nbsp;print());<br/>}<br/>boost::fusion::<span class="cpp_keyword">vector</span>&lt;<span class="cpp_keyword">int</span>,&nbsp;<span class="cpp_keyword">char</span>,&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&gt;&nbsp;stuff(<span class="cpp_literals">2018</span>,&nbsp;<span class="cpp_text">'i'</span>,&nbsp;<span class="cpp_text">"purecpp"</span>);<br/>print_names(stuff);</code></pre>
+      </section>
+      <p>
+        <span class="text">上面这个例子遍历boost::fusion::vector异构容器，打印其中的string类型。</span>
+      </p>
+      <p>
+        <span class="text">关于C++98模版元的书可以看《modern
+          c++ design》和《c++ templates》。</span></p>
+      <p>
+        <span class="text"><br></span>
+      </p>
+      <p class="title_1">
+        <span><strong><span>Modern&nbsp;C++&nbsp;metaprogramming编程思想</span></strong></span>
+      </p>
+      <p>
+        <br></p>
+      <p class="title_2">
+        <span><strong><span>C++11中的元编程思想</span></strong></span>
+      </p>
+      <p>
+        <span class="text">Modern
+          C++新标准对于元编程有着深刻的影响，一些新的编程思想和方法涌现，但总体趋势是元编程变得更简单了。比如C++98中的add_pointer元函数，我们需要写一个模版类：</span></p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>&gt;&nbsp;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">add_pointer</span>&nbsp;{</span>&nbsp;<span class="cpp_keyword">typedef</span>&nbsp;T*&nbsp;type;&nbsp;};<br/><br/><span class="cpp_keyword">typedef</span>&nbsp;<span class="cpp_keyword">typename</span>&nbsp;add_pointer&lt;<span class="cpp_keyword">int</span>&gt;::type&nbsp;int_pointer;</code></pre>
+      </section>
+      <p>
+        <span class="text">而在C++11中我们只需要使用C++11的新特性模版别名就可以定义一个add_pointer元函数了，代码变得更简洁了。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>&gt;&nbsp;<span class="cpp_type_custom">using</span>&nbsp;<span class="cpp_type_custom">add_pointer</span>&nbsp;=&nbsp;<span class="cpp_type_custom">T</span>*;</span><br/><br/><span class="cpp_keyword">using</span>&nbsp;int_pointer&nbsp;=&nbsp;add_pointer&lt;<span class="cpp_keyword">int</span>&gt;;</code></pre>
+      </section>
+      <p>
+        <span class="text">在C++11中，元函数由模版类变为模版别名了。C++11中提供了大量元函数在type_traits库中，这样我们不用再自己写了，直接拿过来使用就行了。</span>
+      </p>
+      <p>
+        <span class="text">C++11中另外的一个新特性variadic
+          template可以作为一个类型容器，我们可以通过variadic templates
+          pack访问模版参数，不需要通过模版递归和特化来访问模版参数。</span></p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>...&nbsp;Values&gt;&nbsp;<span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">meta_list</span>&nbsp;{</span>};<br/><span class="cpp_keyword">using</span>&nbsp;list_of_ints&nbsp;=&nbsp;meta_list&lt;<span class="cpp_keyword">char</span>,&nbsp;<span class="cpp_keyword">short</span>,&nbsp;<span class="cpp_keyword">int</span>,&nbsp;<span class="cpp_keyword">long</span>&gt;;<br/><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">List</span>&gt;&nbsp;<span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">list_size</span>;</span><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>...&gt;&nbsp;<span class="cpp_type_custom">class</span>&nbsp;<span class="cpp_type_custom">List</span>,&nbsp;<span class="cpp_type_custom">class</span>...&nbsp;<span class="cpp_type_custom">Elements</span>&gt;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">list_size</span>&lt;List&lt;Elements...&gt;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;:</span>&nbsp;&nbsp;<span class="cpp_keyword">std</span>::integral_constant&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">size_t</span>,&nbsp;<span class="cpp_keyword">sizeof</span>...(Elements)&gt;&nbsp;{};<br/><br/><span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">auto</span>&nbsp;size&nbsp;=&nbsp;list_size&lt;<span class="cpp_keyword">std</span>::tuple&lt;<span class="cpp_keyword">int</span>,&nbsp;<span class="cpp_keyword">float</span>,&nbsp;<span class="cpp_keyword">void</span>&gt;&gt;::value;<br/><span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">auto</span>&nbsp;size1&nbsp;=&nbsp;list_size&lt;list_of_ints&gt;::value;<br/><span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">auto</span>&nbsp;size2&nbsp;=&nbsp;list_size&lt;boost::variant&lt;<span class="cpp_keyword">int</span>,&nbsp;<span class="cpp_keyword">float</span>&gt;&gt;::value;</code></pre>
+      </section>
+      <p>
+        <span class="text">通过variadic
+          template pack让编译器帮助我们访问类型，比C++98中通过模版递归和特化来访问类型效率更高。</span></p>
+      <p>
+        <span class="text">C++11中另外一个新特性constexpr也让我们编写元函数变得更简单了。</span>
+      </p>
+      <p>
+        <span class="text">在C++98中：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">int</span>&nbsp;n&gt;&nbsp;<span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">fact98</span>&nbsp;{</span><br/>&nbsp;&nbsp;<span class="cpp_keyword">static</span>&nbsp;<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">int</span>&nbsp;value&nbsp;=&nbsp;n&nbsp;*&nbsp;fact98&lt;n&nbsp;-&nbsp;<span class="cpp_literals">1</span>&gt;::value;<br/>};<br/><span class="cpp_keyword">template</span>&nbsp;&lt;&gt;&nbsp;<span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">fact98</span>&lt;0&gt;&nbsp;{</span><br/>&nbsp;&nbsp;<span class="cpp_keyword">static</span>&nbsp;<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">int</span>&nbsp;value&nbsp;=&nbsp;<span class="cpp_literals">1</span>;<br/>};<br/><span class="cpp_keyword">std</span>::<span class="cpp_keyword">cout</span>&nbsp;&lt;&lt;&nbsp;fact98&lt;<span class="cpp_literals">5</span>&gt;::value&nbsp;&lt;&lt;&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">endl</span>;</code></pre>
+      </section>
+      <p>
+        <span class="text">在C++11中：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword"><span class="cpp_type_builtin">constexpr</span>&nbsp;<span class="cpp_type_builtin">int</span>&nbsp;<span class="cpp_type_custom">fact11</span><span class="cpp_operator">(<span class="cpp_keyword">int</span>&nbsp;n)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;n&nbsp;&lt;=&nbsp;<span class="cpp_literals">1</span>&nbsp;?&nbsp;<span class="cpp_literals">1</span>&nbsp;:&nbsp;(n&nbsp;*&nbsp;fact11(n&nbsp;-&nbsp;<span class="cpp_literals">1</span>));<br/>}</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">我们不再需要通过模版特化和递归来做编译期计算了，我们直接通过新的关键字constexpr来实现编译期计算，它修饰一个函数，表明这个函数是在编译期计算的，这个函数和一个普通函数看起来几乎没有分别，唯一的差别就是多了一个constexpr，比C++98的写法简单多了。</span>
+      </p>
+      <p>
+        <span
+          class="text">不过在C++11中constexpr的限制比较多，比如说constexpr函数中只能是个表达式，无法使用变量，循环等语句，在C++14中就去掉这个限制了，让我们可以更方便地写编译期计算的函数了。</span>
+      </p>
+      <p class="title_2">
+        <span><strong><span>C++14中的元编程思想</span></strong></span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_comment">//in&nbsp;c++11</span><br/><span class="cpp_keyword"><span class="cpp_type_builtin">constexpr</span>&nbsp;<span class="cpp_type_builtin">int</span>&nbsp;<span class="cpp_type_custom">fact11</span><span class="cpp_operator">(<span class="cpp_keyword">int</span>&nbsp;n)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;n&nbsp;&lt;=&nbsp;<span class="cpp_literals">1</span>&nbsp;?&nbsp;<span class="cpp_literals">1</span>&nbsp;:&nbsp;(n&nbsp;*&nbsp;fact11(n&nbsp;-&nbsp;<span class="cpp_literals">1</span>));<br/>}<br/><br/><span class="cpp_comment">//in&nbsp;c++14</span><br/><span class="cpp_keyword"><span class="cpp_type_builtin">constexpr</span>&nbsp;<span class="cpp_type_builtin">int</span>&nbsp;<span class="cpp_type_custom">fact14</span><span class="cpp_operator">(<span class="cpp_keyword">int</span>&nbsp;n)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">int</span>&nbsp;s&nbsp;=&nbsp;<span class="cpp_literals">1</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">for</span>&nbsp;(<span class="cpp_keyword">int</span>&nbsp;i&nbsp;=&nbsp;<span class="cpp_literals">1</span>;&nbsp;i&nbsp;&lt;=&nbsp;n;&nbsp;i++)&nbsp;{&nbsp;s&nbsp;=&nbsp;s&nbsp;*&nbsp;i;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;s;<br/>}</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">可以看到在C++14中我们写constexpr编译期计算的函数时，不必受限于表达式语句了，可以定义变量和写循环语句了，这样也不用通过递归去计算了，直接通过循环语句就可以得到编译期计算结果了，使用起来更方便了。</span>
+      </p>
+      <p>
+        <span class="text">在C++14中除了constexpr增强之外，更重要的几个影响元编程思想的特性是constexpr,
+          generic lambda, variable
+          template。新标准、新特性会产生新的编程思想，在C++14里元编程的编程思想发生了重大的变化！</span></p>
+      <p>
+        <span class="text">在2014年Louis
+          Dionne用C++14写的一个叫Hana的元编程库横空出世，它的出现在C++社区引起震动，因为它所采用的方法不再是经典的模版元的那一套方法了，是真正意义上的函数式编程实现的。模版元在概念上是函数式编程，而Hana是第一次在写法上也变成函数式编程了，这是C++元编程思想的一个重大改变。</span>
+      </p>
+      <p class="title_2">
+        <span><strong><span>Boost.Hana的编程思想</span></strong></span>
+      </p>
+      <p>
+        <span class="text">通过一个例子来看Boost.Hana的编程思想：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T&gt;<br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">type_wrapper</span>&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;type&nbsp;=&nbsp;T;<br/>};<br/><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T&gt;<br/>type_wrapper&lt;T&gt;&nbsp;type{};<br/><br/><span class="cpp_comment">//type&nbsp;to&nbsp;value</span><br/><span class="cpp_keyword">auto</span>&nbsp;the_int_type&nbsp;=&nbsp;type&lt;<span class="cpp_keyword">int</span>&gt;;<br/><br/><span class="cpp_comment">//value&nbsp;to&nbsp;type</span><br/><span class="cpp_keyword">using</span>&nbsp;the_real_int_type&nbsp;=&nbsp;<span class="cpp_keyword">decltype</span>(the_int_type)::type;</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">这里我们定义了一个类型的wraper，里面只有一个子类型，接着定义这个wraper的变量模版，有了这个变量模版，我们就可以很方便的实现type-to-value和value-to-type了。</span>
+      </p>
+      <p>
+        <span
+          class="text">某个具体类型的变量模版就代表一个值，通过decltype这个值就能得到变量模版的类型了，有了这个变量模版，我们就可以通过Lambda写元函数了，这里的Lambda是C++14中的generic
+          lambda，这个Lambda的参数就是一个变量模版值，在Lambda表达式中，我们可以对获取值的sub type并做转换，然后再返回变换之后的变量模版值。</span></p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T&gt;<br/>type_wrapper&lt;T&gt;&nbsp;type{};<br/><br/><span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">auto</span>&nbsp;add_pointer&nbsp;=&nbsp;[](<span class="cpp_keyword">auto</span>&nbsp;t)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;T&nbsp;=&nbsp;<span class="cpp_keyword">typename</span>&nbsp;<span class="cpp_keyword">decltype</span>(t)::type;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;type&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">add_pointer_t</span>&lt;T&gt;&gt;;&nbsp;<span class="cpp_comment">//type&nbsp;to&nbsp;value</span><br/>};<br/><br/><span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">auto</span>&nbsp;intptr&nbsp;=&nbsp;add_pointer(type&lt;<span class="cpp_keyword">int</span>&gt;);<br/><span class="cpp_keyword">static_assert</span>(<span class="cpp_keyword">std</span>::is_same_v&lt;<span class="cpp_keyword">decltype</span>(intptr)::type,&nbsp;<span class="cpp_keyword">int</span>*&gt;);&nbsp;<span class="cpp_comment">//value&nbsp;to&nbsp;type</span></code></pre>
+      </section>
+      <p>
+        <span
+          class="text">这里的add_pointer元函数不再是一个模版类或者模版别名了，而是一个Lambda表达式。这里面关键的两个地方是如何把类型变为值和把值变为类型，通过C++14的变量模版就可以实现这个目标了。</span>
+      </p>
+      <p>
+        <span class="text">Boost.Hana的目标是通过类型容器融合编译期和运行期计算，替代boost.mpl和boost.fusion！比如下面的例子：</span>
+      </p>
+      <section>
+        <pre><code>auto&nbsp;animal_types&nbsp;=&nbsp;hana::make_tuple(hana::type_c&lt;Fish*&gt;,&nbsp;hana::type_c&lt;Cat&amp;&gt;,&nbsp;hana::type_c&lt;Dog*&gt;);<br/>auto&nbsp;animal_ptrs&nbsp;=&nbsp;hana::filter(animal_types,&nbsp;[](auto&nbsp;a)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;hana::traits::is_pointer(a);<br/>});<br/><br/>static_assert(animal_ptrs&nbsp;==&nbsp;hana::make_tuple(hana::type_c&lt;Fish*&gt;,&nbsp;hana::type_c&lt;Dog*&gt;),&nbsp;<span class="cpp_text">""</span>);<br/><br/>auto&nbsp;animals&nbsp;=&nbsp;hana::make_tuple(Fish{&nbsp;<span class="cpp_text">"Nemo"</span>&nbsp;},&nbsp;Cat{&nbsp;<span class="cpp_text">"Garfield"</span>&nbsp;},&nbsp;Dog{&nbsp;<span class="cpp_text">"Snoopy"</span>&nbsp;});<br/>auto&nbsp;names&nbsp;=&nbsp;hana::transform(animals,&nbsp;[](auto&nbsp;a)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;a.name;<br/>});<br/>assert(hana::reverse(names)&nbsp;==&nbsp;hana::make_tuple(<span class="cpp_text">"Snoopy"</span>,&nbsp;<span class="cpp_text">"Garfield"</span>,&nbsp;<span class="cpp_text">"Nemo"</span>));</code></pre>
+      </section>
+      <p>
+        <span class="text">我们既可以操作类型容器中的类型，又可以操作类型容器中的运行期的值，Hana可以帮我们很方便地融合编译期与运行期的计算。</span>
+      </p>
+      <p>
+        <span class="text">Boost.Hana的特点：</span>
+      </p>
+      <ul class="list-paddingleft-2" style="">
+        <li>
+          <p>
+            <span class="text">元函数不再是类或类模版，而是lambda；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">不再基于类型，而是基于值；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">没有SFINAE，没有模版递归；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">函数式编程；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">代码更容易理解；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">元编程变得更简单；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">融合编译期与运行期。</span>
+          </p>
+        </li>
+      </ul>
+      <p>
+        <span class="text">以Boost.Hana为代表的元编程实现不再是经典的type
+          level的思想了，而是以C++14新特性实现的lambda
+          level的函数式编程思想了。</span></p>
+      <p class="title_2">
+        <span><strong><span>C++17元编程思想</span></strong></span>
+      </p>
+      <p>
+        <span class="text">在C++17中，元编程得到了进一步地简化，比如我们之前需要借助模版特化，SFINAE才能实现的编译期选择，现在通过if
+          constexpr就可以很轻松的实现了。</span></p>
+      <p>
+        <span class="text">在C++98中：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">size_t</span>&nbsp;I&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">auto</span>&amp;&nbsp;<span class="cpp_type_custom">get</span><span class="cpp_operator">(person&amp;&nbsp;p)</span></span>;<br/><br/><span class="cpp_keyword">template</span>&lt;&gt;<br/><span class="cpp_keyword">auto</span>&amp;&nbsp;get&lt;<span class="cpp_literals">0</span>&gt;(person&amp;&nbsp;p)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;p.id;<br/>}<br/><br/><span class="cpp_keyword">template</span>&lt;&gt;<br/><span class="cpp_keyword">auto</span>&amp;&nbsp;get&lt;<span class="cpp_literals">1</span>&gt;(person&amp;&nbsp;p)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;p.name;<br/>}<br/><br/><span class="cpp_keyword">template</span>&lt;&gt;<br/><span class="cpp_keyword">auto</span>&amp;&nbsp;get&lt;<span class="cpp_literals">2</span>&gt;(person&amp;&nbsp;p)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;p.age;<br/>}</code></pre>
+      </section>
+      <p>
+        <span class="text">在C++17中：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">size_t</span>&nbsp;I&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">auto</span>&amp;&nbsp;<span class="cpp_type_custom">get</span><span class="cpp_operator">(person&amp;&nbsp;p)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">if</span>&nbsp;<span class="cpp_type_custom">constexpr</span>&nbsp;<span class="cpp_operator">(I&nbsp;==&nbsp;<span class="cpp_literals">0</span>)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;p.id;<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">else</span>&nbsp;<span class="cpp_keyword">if</span>&nbsp;<span class="cpp_keyword">constexpr</span>&nbsp;(I&nbsp;==&nbsp;<span class="cpp_literals">1</span>)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;p.name;<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">else</span>&nbsp;<span class="cpp_keyword">if</span>&nbsp;<span class="cpp_keyword">constexpr</span>&nbsp;(I&nbsp;==&nbsp;<span class="cpp_literals">2</span>)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;p.age;<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>}</code></pre>
+      </section>
+      <p>
+        <span class="text">这里不再需要模版特化了，也不需要拆分成多个函数了，就像普通的if-else语句一样写编译期选择的代码，简洁易懂！</span>
+      </p>
+      <p>
+        <span class="text">在C++14中：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T&gt;<br/><span class="cpp_keyword">std</span>::<span class="cpp_keyword">enable_if_t</span>&lt;<span class="cpp_keyword">std</span>::is_same_v&lt;T,&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&gt;,&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&gt;&nbsp;to_string(T&nbsp;t){<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;t;<br/>}<br/><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T&gt;<br/><span class="cpp_keyword">std</span>::<span class="cpp_keyword">enable_if_t</span>&lt;!<span class="cpp_keyword">std</span>::is_same_v&lt;T,&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&gt;,&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&gt;&nbsp;to_string(T&nbsp;t){<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;<span class="cpp_keyword">std</span>::to_string(t);<br/>}</code></pre>
+      </section>
+      <p>
+        <span class="text">在C++17中：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T&gt;<br/><span class="cpp_keyword">std</span>::<span class="cpp_keyword"><span class="cpp_type_builtin">string</span>&nbsp;<span class="cpp_type_custom">to_string</span><span class="cpp_operator">(T&nbsp;t)</span></span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">if</span>&nbsp;<span class="cpp_type_custom">constexpr</span><span class="cpp_operator">(<span class="cpp_keyword">std</span>::is_same_v&lt;T,&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&gt;)</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_builtin">return</span>&nbsp;t</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">else</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;<span class="cpp_keyword">std</span>::to_string(t);<br/>}</code></pre>
+      </section>
+      <p>
+        <span class="text">这里不再需要SFINAE了，同样可以实现编译期选择，代码更加简洁。</span>
+      </p>
+      <p>
+        <span class="text">C++元编程的库以这些库为代表，这些库代表了C++元编程思想不断演进的一个趋势：</span>
+      </p>
+      <ul class="list-paddingleft-2" style="">
+        <li>
+          <p>
+            <span class="text">C++98：boost.mpl，boost.fusion</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">C++11：boost.mp11，meta，brigand</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">C++14：boost.hana</span>
+          </p>
+        </li>
+      </ul>
+      <p>
+        <strong><span class="text">从C++98到Modern
+            C++，C++新标准新特性产生新的idea，让元编程变得更简单更强大，Newer is
+            Better!</span></strong></p>
+      <p>
+        <strong><span class="text"><br></span></strong>
+      </p>
+      <p class="title_1">
+        <span><strong><span>Modern&nbsp;C++&nbsp;元编程应用</span></strong></span></p>
+      <p>
+        <br></p>
+      <p class="title_2">
+        <span><strong><span>编译期检查</span></strong></span>
+      </p>
+      <p>
+        <span
+          class="text">元编程的一个典型应用就是编译期检查，这也是元编程最简单的一个应用，简单到用一行代码就可以实现编译期检查。比如我们需要检查程序运行的系统是32位的还是64位的，通过一个简单的assert就可以实现了。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">static_assert</span>(<span class="cpp_keyword">sizeof</span>(<span class="cpp_keyword">void</span>&nbsp;*)&nbsp;==&nbsp;<span class="cpp_literals">8</span>,&nbsp;<span class="cpp_text">"expected&nbsp;64-bit&nbsp;platform"</span>);<br/></code></pre>
+      </section>
+      <p>
+        <span class="text">当系统为32位时就会产生一个编译期错误并且编译器会告诉你错误的原因。</span><br /></p>
+      <p>
+        <span class="text">这种编译期检查比通过#if
+          define宏定义来检查系统是32位还是64位好得多，因为宏定义可能存在忘记写的问题，并不能在编译期就检查到错误，要到运行期才能发现问题，这时候就太晚了。</span></p>
+      <p>
+        <span class="text">再看一个例子：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;T,&nbsp;<span class="cpp_keyword">int</span>&nbsp;Row,&nbsp;<span class="cpp_keyword">int</span>&nbsp;Column&gt;<br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">Matrix</span>&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">static_assert</span>(Row&nbsp;&gt;=&nbsp;<span class="cpp_literals">0</span>,&nbsp;<span class="cpp_text">"Row&nbsp;number&nbsp;must&nbsp;be&nbsp;positive."</span>);<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">static_assert</span>(Column&nbsp;&gt;=&nbsp;<span class="cpp_literals">0</span>,&nbsp;<span class="cpp_text">"Column&nbsp;number&nbsp;must&nbsp;be&nbsp;positive."</span>);<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">static_assert</span>(Row&nbsp;+&nbsp;Column&nbsp;&gt;&nbsp;<span class="cpp_literals">0</span>,&nbsp;<span class="cpp_text">"Row&nbsp;and&nbsp;Column&nbsp;must&nbsp;be&nbsp;greater&nbsp;than&nbsp;0."</span>);<br/>};</code></pre>
+      </section>
+      <p>
+        <span class="text">在这个例子中，这个Matrix是非常安全的，完全不用担心定义Matrix时行和列的值写错了，因为编译器会在编译期提醒你哪里写错了，而不是等到运行期才发现错误。</span>
+      </p>
+      <p>
+        <span class="text">除了经常用staticassert做编译期检查之外，我们还可以使用enableif来做编译期检查。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">A</span>&nbsp;{</span><br/><span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">foo</span><span class="cpp_operator">()</span></span>{}<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">int</span>&nbsp;member;<br/>};<br/><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;Function&gt;<br/><span class="cpp_keyword">std</span>::<span class="cpp_keyword">enable_if_t</span>&lt;!<span class="cpp_keyword">std</span>::is_member_function_pointer_v&lt;Function&gt;&gt;&nbsp;foo(Function&amp;&amp;&nbsp;f)&nbsp;{<br/>}<br/><br/>foo([]&nbsp;{});&nbsp;&nbsp;<span class="cpp_comment">//ok</span><br/>foo(&amp;A::foo);&nbsp;&nbsp;<span class="cpp_comment">//compile&nbsp;error:&nbsp;no&nbsp;matching&nbsp;function&nbsp;for&nbsp;call&nbsp;to&nbsp;'foo(void&nbsp;(A::*)())'</span></code></pre>
+      </section>
+      <p>
+        <span class="text">比如这个代码，我们通过std::enableift来限定输入参数的类型必须为非成员函数，如果传入了成员函数则会出现一个编译期错误。</span>
+      </p>
+      <p>
+        <span class="text">元编程可以让我们的代码更安全，帮助我们尽可能早地、在程序运行之前的编译期就发现bug，让编译器而不是人来帮助我们发现bug。</span>
+      </p>
+      <p class="title_2">
+        <span><strong><span>编译期探测</span></strong></span>
+      </p>
+      <p>
+        <span class="text">元编程可以帮助我们在编译期探测一个成员函数或者成员变量是否存在。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;&nbsp;<span class="cpp_keyword_class">class</span>,&nbsp;<span class="cpp_type_custom">class</span>&nbsp;=&nbsp;<span class="cpp_type_custom">void</span>&nbsp;&gt;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">has_foo</span>&nbsp;:</span>&nbsp;<span class="cpp_keyword">std</span>::false_type&nbsp;{};<br/><br/><span class="cpp_keyword">template</span>&lt;&nbsp;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>&nbsp;&gt;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">has_foo</span>&lt;&nbsp;T,&nbsp;std::void_t&lt;decltype(std::declval&lt;T&gt;().foo())&gt;&nbsp;&gt;&nbsp;:</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::true_type&nbsp;{};<br/><br/><span class="cpp_keyword">template</span>&lt;&nbsp;<span class="cpp_keyword_class">class</span>,&nbsp;<span class="cpp_type_custom">class</span>&nbsp;=&nbsp;<span class="cpp_type_custom">void</span>&nbsp;&gt;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">has_member</span>&nbsp;:</span>&nbsp;<span class="cpp_keyword">std</span>::false_type&nbsp;{};<br/><br/><span class="cpp_keyword">template</span>&lt;&nbsp;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>&nbsp;&gt;<br/><span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">has_member</span>&lt;&nbsp;T,&nbsp;std::void_t&lt;decltype(std::declval&lt;T&gt;().member)&gt;&nbsp;&gt;&nbsp;:</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::true_type&nbsp;{};<br/><br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">A</span>&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">foo</span><span class="cpp_operator">()</span></span>{}<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">int</span>&nbsp;member;<br/>};<br/><span class="cpp_keyword">static_assert</span>(has_foo&lt;&nbsp;A&nbsp;&gt;::value);<br/><span class="cpp_keyword">static_assert</span>(has_member&lt;&nbsp;A&nbsp;&gt;::value);</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">我们借助C++17的void_t，就可以轻松实现编译期探测功能了，这里实际上是利用了SFINAE特性，当decltype(std::declval().foo())成功了就表明存在foo成员函数，否则就不存在。</span>
+      </p>
+      <p>
+        <span class="text">通过编译期探测我们可以很容易实现一个AOP（Aspect
+          Oriented
+          Programming）功能，AOP可以通过一系列的切面帮我们把核心逻辑和非核心逻辑分离。</span></p>
+      <section>
+        <pre><code><span class="cpp_keyword">server</span>.set_http_handler&lt;<span class="cpp_keyword">GET</span>,&nbsp;POST&gt;(<span class="cpp_text">"/aspect"</span>,&nbsp;[](<span class="cpp_keyword">request</span>&amp;&nbsp;req,&nbsp;<span class="cpp_keyword">response</span>&amp;&nbsp;res)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;res.render_string(<span class="cpp_text">"hello&nbsp;world"</span>);<br/>},&nbsp;check{},&nbsp;log_t{});</code></pre>
+      </section>
+      <p>
+        <span class="text">上面这段代码的核心逻辑就是返回一个hello
+          world，非核心逻辑就是检查输入参数和记录日志，把非核心逻辑分离出来放到两个切面中，不仅仅可以让我们的核心逻辑保持简洁，还可以让我们可以更专注于核心逻辑。</span></p>
+      <p>
+        <span class="text">实现AOP的思路很简单，通过编译期探测，探测切面中是否存在before或者after成员函数，存在就调用。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">bool</span>&nbsp;has_befor_mtd&nbsp;=&nbsp;has_before&lt;<span class="cpp_keyword">decltype</span>(item),&nbsp;request&amp;,&nbsp;response&amp;&gt;::value;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">if</span>&nbsp;<span class="cpp_type_custom">constexpr</span>&nbsp;<span class="cpp_operator">(has_befor_mtd)</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;r&nbsp;</span>=&nbsp;item.before(req,&nbsp;res);<br/><br/><span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">bool</span>&nbsp;has_after_mtd&nbsp;=&nbsp;has_after&lt;<span class="cpp_keyword">decltype</span>(item),&nbsp;request&amp;,&nbsp;response&amp;&gt;::value;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">if</span>&nbsp;<span class="cpp_type_custom">constexpr</span>&nbsp;<span class="cpp_operator">(has_after_mtd)</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;r&nbsp;</span>=&nbsp;item.after(req,&nbsp;res);</code></pre>
+      </section>
+      <p>
+        <span class="text">为了让编译期探测的代码能复用，并且支持可变模版参数，我们可以写一个通用的编译期探测的代码：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_comment">#define&nbsp;HAS_MEMBER(member)\</span><br/>template&lt;typename&nbsp;T,&nbsp;typename...&nbsp;Args&gt;\<br/>struct&nbsp;has_<span class="cpp_comment">##member\</span><br/>{\<br/><span class="cpp_keyword">private</span>:\<br/>&nbsp;&nbsp;&nbsp;&nbsp;template&lt;typename&nbsp;U&gt;&nbsp;<span class="cpp_keyword">static</span>&nbsp;auto&nbsp;Check(int)&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;decltype(std::declval&lt;U&gt;().member(std::declval&lt;Args&gt;()...),&nbsp;std::true_type());&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;template&lt;typename&nbsp;U&gt;&nbsp;<span class="cpp_keyword">static</span>&nbsp;std::false_type&nbsp;Check(...);\<br/><span class="cpp_keyword">public</span>:\<br/>&nbsp;&nbsp;&nbsp;&nbsp;enum{value&nbsp;=&nbsp;std::is_same&lt;decltype(Check&lt;T&gt;(<span class="cpp_literals">0</span>)),&nbsp;std::true_type&gt;::value};\<br/>};<br/><br/>HAS_MEMBER(before)<br/>HAS_MEMBER(after)</code></pre>
+      </section>
+      <p>
+        <span class="text">具体代码可以参考这里：https://github.com/qicosmos/feather。</span>
+      </p>
+      <p>
+        <span class="text">注：这段宏代码可以用c++20的std::is_detected替代，也可以写一个C++14/17的代码来替代这个宏：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">namespace</span>&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">nonesuch</span>&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nonesuch()&nbsp;=&nbsp;<span class="cpp_keyword">delete</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~nonesuch()&nbsp;=&nbsp;<span class="cpp_keyword">delete</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nonesuch(<span class="cpp_keyword">const</span>&nbsp;nonesuch&amp;)&nbsp;=&nbsp;<span class="cpp_keyword">delete</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">void</span>&nbsp;<span class="cpp_keyword">operator</span>=(<span class="cpp_keyword">const</span>&nbsp;nonesuch&amp;)&nbsp;=&nbsp;<span class="cpp_keyword">delete</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;};<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">Default</span>,&nbsp;<span class="cpp_type_custom">class</span>&nbsp;<span class="cpp_type_custom">AlwaysVoid</span>,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">template</span>&lt;class...&gt;&nbsp;<span class="cpp_type_custom">class</span>&nbsp;<span class="cpp_type_custom">Op</span>,&nbsp;<span class="cpp_type_custom">class</span>...&nbsp;<span class="cpp_type_custom">Args</span>&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">detector</span>&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;<span class="cpp_keyword">value_t</span>&nbsp;=&nbsp;<span class="cpp_keyword">std</span>::false_type;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;type&nbsp;=&nbsp;Default;<br/>&nbsp;&nbsp;&nbsp;&nbsp;};<br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">Default</span>,&nbsp;<span class="cpp_type_custom">template</span>&lt;class...&gt;&nbsp;<span class="cpp_type_custom">class</span>&nbsp;<span class="cpp_type_custom">Op</span>,&nbsp;<span class="cpp_type_custom">class</span>...&nbsp;<span class="cpp_type_custom">Args</span>&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">struct</span>&nbsp;<span class="cpp_type_custom">detector</span>&lt;Default,&nbsp;std::void_t&lt;Op&lt;Args...&gt;&gt;,&nbsp;Op,&nbsp;Args...&gt;&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;<span class="cpp_keyword">value_t</span>&nbsp;=&nbsp;<span class="cpp_keyword">std</span>::true_type;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;type&nbsp;=&nbsp;Op&lt;Args...&gt;;<br/>&nbsp;&nbsp;&nbsp;&nbsp;};<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>...&gt;&nbsp;<span class="cpp_type_custom">class</span>&nbsp;<span class="cpp_type_custom">Op</span>,&nbsp;<span class="cpp_type_custom">class</span>...&nbsp;<span class="cpp_type_custom">Args</span>&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">using</span>&nbsp;<span class="cpp_type_custom">is_detected</span>&nbsp;=&nbsp;<span class="cpp_type_custom">typename</span>&nbsp;<span class="cpp_type_custom">detector</span>&lt;nonesuch,&nbsp;void,&nbsp;Op,&nbsp;Args...&gt;:</span>:<span class="cpp_keyword">value_t</span>;<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>...&gt;&nbsp;<span class="cpp_type_custom">class</span>&nbsp;<span class="cpp_type_custom">Op</span>,&nbsp;<span class="cpp_type_custom">class</span>...&nbsp;<span class="cpp_type_custom">Args</span>&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">using</span>&nbsp;<span class="cpp_type_custom">detected_t</span>&nbsp;=&nbsp;<span class="cpp_type_custom">typename</span>&nbsp;<span class="cpp_type_custom">detector</span>&lt;nonesuch,&nbsp;void,&nbsp;Op,&nbsp;Args...&gt;:</span>:type;<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>,&nbsp;<span class="cpp_type_custom">typename</span>...&nbsp;<span class="cpp_type_custom">Args</span>&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">using</span>&nbsp;<span class="cpp_type_custom">has_before_t</span>&nbsp;=&nbsp;<span class="cpp_type_custom">decltype</span>(<span class="cpp_type_custom">std</span>:</span>:declval&lt;T&gt;().before(<span class="cpp_keyword">std</span>::declval&lt;Args&gt;()...));<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">T</span>,&nbsp;<span class="cpp_type_custom">typename</span>...&nbsp;<span class="cpp_type_custom">Args</span>&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">using</span>&nbsp;<span class="cpp_type_custom">has_after_t</span>&nbsp;=&nbsp;<span class="cpp_type_custom">decltype</span>(<span class="cpp_type_custom">std</span>:</span>:declval&lt;T&gt;().after(<span class="cpp_keyword">std</span>::declval&lt;Args&gt;()...));<br/>}<br/><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;T,&nbsp;<span class="cpp_keyword">typename</span>...&nbsp;Args&gt;<br/><span class="cpp_keyword">using</span>&nbsp;has_before&nbsp;=&nbsp;is_detected&lt;<span class="cpp_keyword">has_before_t</span>,&nbsp;T,&nbsp;Args...&gt;;<br/><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;T,&nbsp;<span class="cpp_keyword">typename</span>...&nbsp;Args&gt;<br/><span class="cpp_keyword">using</span>&nbsp;has_after&nbsp;=&nbsp;is_detected&lt;<span class="cpp_keyword">has_after_t</span>,&nbsp;T,&nbsp;Args...&gt;;</code></pre>
+      </section>
+      <p>
+        <br></p>
+      <p class="title_1">
+        <span><strong><span>编译期计算</span></strong></span>
+      </p>
+      <p>
+        <br /></p>
+      <p>
+        <span class="text">编译期计算包含了较多内容，限于篇幅，我们重点说一下类型萃取的应用：</span>
+      </p>
+      <ul class="list-paddingleft-2" style="">
+        <li>
+          <p>
+            <span class="text">类型计算；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">类型推导；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">类型萃取；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">类型转换；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">数值计算：表达式模版，Xtensor，Eigen，Mshadow。</span>
+          </p>
+        </li>
+      </ul>
+      <p>
+        <span class="text">我们可以通过一个function_traits来萃取可调用对象的类型、参数类型、参数个数等类型信息。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;Ret,&nbsp;<span class="cpp_keyword">typename</span>...&nbsp;Args&gt;<br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">function_traits_impl</span>&lt;Ret(Args...)&gt;{</span><br/><span class="cpp_keyword">public</span>:<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">enum</span>&nbsp;{&nbsp;arity&nbsp;=&nbsp;<span class="cpp_keyword">sizeof</span>...(Args)&nbsp;};<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">typedef</span>&nbsp;Ret&nbsp;<span class="cpp_type_custom">function_type</span><span class="cpp_operator">(Args...)</span></span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">typedef</span>&nbsp;Ret&nbsp;result_type;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;stl_function_type&nbsp;=&nbsp;<span class="cpp_keyword">std</span>::function&lt;function_type&gt;;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">typedef</span>&nbsp;<span class="cpp_type_custom">Ret</span><span class="cpp_operator">(*pointer)(Args...)</span></span>;<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">size_t</span>&nbsp;I&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">args</span>{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">static_assert</span>(I&nbsp;&lt;&nbsp;arity,&nbsp;<span class="cpp_text">"index&nbsp;is&nbsp;out&nbsp;of&nbsp;range,&nbsp;index&nbsp;must&nbsp;less&nbsp;than&nbsp;sizeof&nbsp;Args"</span>);<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;type&nbsp;=&nbsp;<span class="cpp_keyword">typename</span>&nbsp;<span class="cpp_keyword">std</span>::tuple_element&lt;I,&nbsp;<span class="cpp_keyword">std</span>::tuple&lt;Args...&gt;&gt;::type;<br/>&nbsp;&nbsp;&nbsp;&nbsp;};<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">typedef</span>&nbsp;<span class="cpp_keyword">std</span>::tuple&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">remove_cv_t</span>&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">remove_reference_t</span>&lt;Args&gt;&gt;...&gt;&nbsp;tuple_type;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;<span class="cpp_keyword">args_type_t</span>&nbsp;=&nbsp;<span class="cpp_keyword">std</span>::tuple&lt;Args...&gt;;<br/>};</code></pre>
+      </section>
+      <p>
+        <span class="text">完整代码可以参考这里：https://github.com/qicosmos/cinatra。</span>
+      </p>
+      <p>
+        <span class="text">有了这个function_traits之后就方便实现一个RPC路由了，以rest_rpc为例（https://github.com/qicosmos/rest_rpc）：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">rpc_service</span>&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">int</span>&nbsp;<span class="cpp_type_custom">add</span><span class="cpp_operator">(<span class="cpp_keyword">int</span>&nbsp;a,&nbsp;<span class="cpp_keyword">int</span>&nbsp;b)</span>&nbsp;</span>{&nbsp;<span class="cpp_keyword">return</span>&nbsp;a&nbsp;+&nbsp;b;&nbsp;}<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword"><span class="cpp_type_builtin">string</span>&nbsp;<span class="cpp_type_custom">translate</span><span class="cpp_operator">(<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&amp;&nbsp;orignal)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&nbsp;temp&nbsp;=&nbsp;orignal;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">for</span>&nbsp;(<span class="cpp_keyword">auto</span>&amp;&nbsp;c&nbsp;:&nbsp;temp)&nbsp;c&nbsp;=&nbsp;<span class="cpp_keyword">toupper</span>(c);<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;temp;<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>};<br/><br/><br/>rpc_server&nbsp;server;<br/>server.register_handler(<span class="cpp_text">"add"</span>,&nbsp;&amp;rpc_service::add,&nbsp;&amp;rpc_srv);<br/>server.register_handler(<span class="cpp_text">"translate"</span>,&nbsp;&amp;rpc_service::translate,&nbsp;&amp;rpc_srv);<br/><br/><span class="cpp_keyword">auto</span>&nbsp;result&nbsp;=&nbsp;client.call&lt;<span class="cpp_keyword">int</span>&gt;(<span class="cpp_text">"add"</span>,&nbsp;<span class="cpp_literals">1</span>,&nbsp;<span class="cpp_literals">2</span>);<br/><span class="cpp_keyword">auto</span>&nbsp;result&nbsp;=&nbsp;client.call&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&gt;(<span class="cpp_text">"translate"</span>,&nbsp;<span class="cpp_text">"hello"</span>);</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">RPCServer注册了两个服务函数add和translate，客户端发起RPC调用，会传RPC函数的实际参数，这里需要把网络传过来的字节映射到一个函数并调用，这里就需要一个RPC路由来做这个事情。下面是RestRPC路由的实现：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;Function&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">register_nonmember_func</span><span class="cpp_operator">(<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&nbsp;<span class="cpp_keyword">const</span>&amp;&nbsp;name,&nbsp;<span class="cpp_keyword">const</span>&nbsp;Function&amp;&nbsp;f)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">this</span>-&gt;map_invokers_[name]&nbsp;=&nbsp;{&nbsp;<span class="cpp_keyword">std</span>::bind(&amp;invoker&lt;Function&gt;::apply,&nbsp;f,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::placeholders::_1,&nbsp;<span class="cpp_keyword">std</span>::placeholders::_2,&nbsp;<span class="cpp_keyword">std</span>::placeholders::_3)&nbsp;};<br/>}<br/><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;Function&gt;<br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">invoker</span>&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">static</span>&nbsp;<span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">apply</span><span class="cpp_operator">(<span class="cpp_keyword">const</span>&nbsp;Function&amp;&nbsp;func,&nbsp;<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">char</span>*&nbsp;data,&nbsp;<span class="cpp_keyword">size_t</span>&nbsp;size,<br/><span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&amp;&nbsp;result)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;args_tuple&nbsp;=&nbsp;<span class="cpp_keyword">typename</span>&nbsp;function_traits&lt;Function&gt;::args_tuple;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msgpack_codec&nbsp;codec;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">auto</span>&nbsp;tp&nbsp;=&nbsp;codec.unpack&lt;args_tuple&gt;(data,&nbsp;size);<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call(func,&nbsp;result,&nbsp;tp);<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>};</code></pre>
+      </section>
+      <p>
+        <span class="text"><span
+            style="max-width: 100%;letter-spacing: 0.544px;">RPCServer</span>注册RPC服务函数的时候，函数类型会保存在invoker中，后面收到网络字节的时候，我们通过functiontraits萃取出函数参数对应的tuple类型，反序列化得到一个实例化的tuple之后就可以借助C++17的std::apply实现函数调用了。详细代码可以参考rest_rpc。</span>
+      </p>
+      <p>
+        <br></p>
+      <p class="title_1">
+        <span><strong><span>编译期反射</span></strong></span>
+      </p>
+      <p>
+        <br></p>
+      <p>
+        <span class="text">通过编译期反射，我们可以得到类型的元数据，有了这个元数据之后我们就可以用它做很多有趣的事情了。可以用编译期反射实现：</span>
+      </p>
+      <ul class="list-paddingleft-2" style="">
+        <li>
+          <p>
+            <span class="text">序列化引擎；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">ORM；</span>
+          </p>
+        </li>
+        <li>
+          <p>
+            <span class="text">协议适配器。</span>
+          </p>
+        </li>
+      </ul>
+      <p>
+        <span
+          class="text">以序列化引擎iguana（https://github.com/qicosmos/iguana）来举例，通过编译期反射可以很容易的将元数据映射为json、xml、msgpack或其他格式的数据。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">person</span>{</span><br/>&nbsp;&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&nbsp;&nbsp;name;<br/>&nbsp;&nbsp;<span class="cpp_keyword">int</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;age;<br/>};<br/>REFLECTION(person,&nbsp;name,&nbsp;age)<br/><br/>person&nbsp;p&nbsp;=&nbsp;{<span class="cpp_text">"tom"</span>,&nbsp;<span class="cpp_literals">20</span>};<br/>iguana::string_stream&nbsp;ss;<br/><br/>to_xml(ss,&nbsp;p);<br/>to_json(ss,&nbsp;p);<br/>to_msgpack(ss,&nbsp;p);<br/>to_protobuf(ss,&nbsp;p);</code></pre>
+      </section>
+      <p>
+        <span class="text">以ORM引擎（https://github.com/qicosmos/ormpp）举例，通过编译期反射得到的元数据可以用来自动生成目标数据库的SQL语句：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">ormpp</span>::dbng</span>&lt;<span class="cpp_keyword">mysql</span>&gt;&nbsp;<span class="cpp_keyword">mysql</span>;<br/><span class="cpp_keyword">ormpp</span>::dbng</span>&lt;<span class="cpp_keyword">sqlite</span>&gt;&nbsp;<span class="cpp_keyword">sqlite</span>;<br/><span class="cpp_keyword">ormpp</span>::dbng</span>&lt;<span class="cpp_keyword">postgresql</span>&gt;&nbsp;<span class="cpp_keyword">postgres</span>;<br/><br/><span class="cpp_keyword">mysql</span><span class="cpp_mem_func_call">.create_datatable</span>&lt;<span class="cpp_keyword">person</span>&gt;();<br/><span class="cpp_keyword">sqlite</span><span class="cpp_mem_func_call">.create_datatable</span>&lt;<span class="cpp_keyword">person</span>&gt;();<br/><span class="cpp_keyword">postgres</span><span class="cpp_mem_func_call">.create_datatable</span>&lt;<span class="cpp_keyword">person</span>&gt;();</code></pre>
+      </section>
+      <p>
+        <strong><span class="text">反射将进入C++23标准，未来的C++标准中的反射将更强大和易用。</span></strong>
+      </p>
+      <p>
+        <br></p>
+      <p class="title_1">
+        <span><strong><span>融合编译期和运行期</span></strong></span>
+      </p>
+      <p>
+        <br></p>
+      <p>
+        <span
+          class="text">运行期和编译期存在一个巨大的鸿沟，而在实际应用中我需要融合编译期与运行期，这时候就需要一个桥梁来连接编译期与运行期。编译期和运行期从概念上可以简单地认为分别代表了type和value，融合的关键就是如何实现type
+          to value以及value to type。</span></p>
+      <p>
+        <span class="text">Modern
+          C++已经给我们提供了便利，比如下面这个例子：</span></p>
+      <section>
+        <pre><code><span class="cpp_keyword">auto</span>&nbsp;val&nbsp;=&nbsp;<span class="cpp_keyword">std</span>::integral_constant&lt;<span class="cpp_keyword">int</span>,&nbsp;<span class="cpp_literals">5</span>&gt;{};<br/><span class="cpp_keyword">using</span>&nbsp;int_type&nbsp;=&nbsp;<span class="cpp_keyword">decltype</span>(val);<br/><br/><span class="cpp_keyword">auto</span>&nbsp;v&nbsp;=&nbsp;<span class="cpp_keyword">decltype</span>(val)::value;</code></pre>
+      </section>
+      <p>
+        <span class="text">我们可以很方便地将一个值变为一个类型，然后由通过类型获得一个值。接下来我们来看一个具体的例子：如何根据一个运行时的值调用一个编译期模版函数？</span>
+      </p>
+      <section>
+        <pre><code>template&lt;size_t&nbsp;N&gt;<br/>void&nbsp;<span class="cpp_keyword"><span class="cpp_type_custom">fun</span><span class="cpp_operator">()</span></span>&nbsp;{}<br/><br/>void&nbsp;foo(int&nbsp;n)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;switch&nbsp;(n){<br/>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;<span class="cpp_literals">0</span>:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">fun</span><span class="cpp_type_custom">&lt;0&gt;</span><span class="cpp_operator">()</span></span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">break</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;<span class="cpp_literals">1</span>:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">fun</span><span class="cpp_type_custom">&lt;1&gt;</span><span class="cpp_operator">()</span></span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">break</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;case&nbsp;<span class="cpp_literals">2</span>:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">fun</span><span class="cpp_type_custom">&lt;2&gt;</span><span class="cpp_operator">()</span></span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">break</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">default</span>:<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">break</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>}</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">这个代码似乎很好地解决了这个问题，可以实现从运行期数值到编译期模版函数调用。但是如果这个运行期数值越来越大的时候，我们这个switch就会越来越长，还存在写错的可能，比如调用了foo(100)，那这时候真的需要写100个switch-case吗？所以这个写法并不完美。</span>
+      </p>
+      <p>
+        <span class="text">我们可以借助tuple来比较完美地解决这个问题：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">namespace</span>&nbsp;detail&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">Tuple</span>,&nbsp;<span class="cpp_type_custom">class</span>&nbsp;<span class="cpp_type_custom">F</span>,&nbsp;<span class="cpp_type_custom">std</span>:</span>:<span class="cpp_keyword">size_t</span>...Is&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">tuple_switch</span><span class="cpp_operator">(<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">size_t</span>&nbsp;i,&nbsp;Tuple&amp;&amp;&nbsp;t,&nbsp;F&amp;&amp;&nbsp;f,&nbsp;<span class="cpp_keyword">std</span>::index_sequence&lt;Is...&gt;)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="cpp_keyword">void</span>)<span class="cpp_keyword">std</span>::<span class="cpp_keyword">initializer_list</span>&lt;<span class="cpp_keyword">int</span>&gt;&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(i&nbsp;==&nbsp;Is&nbsp;&amp;&amp;&nbsp;(<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="cpp_keyword">void</span>)<span class="cpp_keyword">std</span>::forward&lt;F&gt;(f)(<span class="cpp_keyword">std</span>::integral_constant&lt;<span class="cpp_keyword">size_t</span>,&nbsp;Is&gt;{}),&nbsp;<span class="cpp_literals">0</span>))...<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>}&nbsp;<span class="cpp_comment">//&nbsp;namespace&nbsp;detail</span><br/><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">Tuple</span>,&nbsp;<span class="cpp_type_custom">class</span>&nbsp;<span class="cpp_type_custom">F</span>&gt;<br/><span class="cpp_type_custom">inline</span>&nbsp;<span class="cpp_type_custom">void</span>&nbsp;<span class="cpp_type_custom">tuple_switch</span>(<span class="cpp_type_custom">const</span>&nbsp;<span class="cpp_type_custom">std</span>:</span>:<span class="cpp_keyword">size_t</span>&nbsp;i,&nbsp;Tuple&amp;&amp;&nbsp;t,&nbsp;F&amp;&amp;&nbsp;f)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">auto</span>&nbsp;N&nbsp;=<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::tuple_size&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">remove_reference_t</span>&lt;Tuple&gt;&gt;::value;<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;detail::tuple_switch(i,&nbsp;<span class="cpp_keyword">std</span>::forward&lt;Tuple&gt;(t),&nbsp;<span class="cpp_keyword">std</span>::forward&lt;F&gt;(f),<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::make_index_sequence&lt;N&gt;{});<br/>}<br/><br/><span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">foo</span><span class="cpp_operator">(<span class="cpp_keyword">int</span>&nbsp;n)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::tuple&lt;<span class="cpp_keyword">int</span>,&nbsp;<span class="cpp_keyword">int</span>,&nbsp;<span class="cpp_keyword">int</span>&gt;&nbsp;tp;<br/>&nbsp;&nbsp;&nbsp;&nbsp;tuple_switch(n,&nbsp;tp,&nbsp;[](<span class="cpp_keyword">auto</span>&nbsp;item)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">constexpr</span>&nbsp;<span class="cpp_keyword">auto</span>&nbsp;I&nbsp;=&nbsp;<span class="cpp_keyword">decltype</span>(item)::value;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&lt;I&gt;();<br/>&nbsp;&nbsp;&nbsp;&nbsp;});<br/>}<br/><br/>foo(<span class="cpp_literals">1</span>);<br/>foo(<span class="cpp_literals">2</span>);</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">通过一个tuple_switch就可以通过运行期的值调用编译期模版函数了，不用switch-case了。关于之前需要写很长的switch-case语句的问题，也可以借助元编程来解决：</span>
+      </p>
+      <section>
+        <pre><code>template&lt;size_t...&nbsp;Is&gt;<br/>auto&nbsp;make_tuple_from_sequence(std::index_sequence&lt;Is...&gt;)-&gt;decltype(std::make_tuple(Is...))&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::make_tuple(Is...);<br/>}<br/><br/>template&lt;size_t&nbsp;N&gt;<br/>constexpr&nbsp;auto&nbsp;make_tuple_from_sequence()<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;decltype(make_tuple_from_sequence(std::make_index_sequence&lt;N&gt;{}))&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;make_tuple_from_sequence(std::make_index_sequence&lt;N&gt;{});<br/>}<br/><br/>void&nbsp;foo(int&nbsp;n)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decltype(make_tuple_from_sequence&lt;<span class="cpp_literals">100</span>&gt;())&nbsp;tp;&nbsp;&nbsp;//std</span><span class="cpp_literals">::tuple&lt;int</span>,&nbsp;int,&nbsp;…,&nbsp;int&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tuple_switch(n,&nbsp;tp,&nbsp;[](auto&nbsp;item)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constexpr&nbsp;auto&nbsp;I&nbsp;=&nbsp;decltype(item)<span class="cpp_literals">::value</span>;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&lt;I&gt;();<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br/>}<br/><br/>foo(<span class="cpp_literals">98</span>);<br/>foo(<span class="cpp_literals">99</span>);</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">这里的decltype(maketuplefrom_sequence&lt;100&gt;())会自动生成一个有100个int的tuple&lt;int,...,int&gt;辅助类型，有了这个辅助类型，我们完全不必要去写长长的switch-case语句了。</span>
+      </p>
+      <p>
+        <span
+          class="text">有人也许会担心，这里这么长的tuple&lt;int,...,int&gt;会不会生成100个Lambda实例化代码？这里其实不用担心，因为编译器可以做优化，优化的情况下只会生成一次Lambda实例化的代码，而且实际场景中不可能存在100个分支的代码。</span>
+      </p>
+      <p>
+        <br></p>
+      <p class="title_1">
+        <span><strong><span>接口的泛化与统一</span></strong></span>
+      </p>
+      <p>
+        <br></p>
+      <p>
+        <span class="text">元编程可以帮助我们融合底层异构的子系统、屏蔽接口或系统的差异、提供统一的接口。</span>
+      </p>
+      <p>
+        <span class="text">以ORM为例：</span>
+      </p>
+      <p>
+        <span class="text">MySQL
+          connect</span></p>
+      <section>
+        <pre><code>mysql_real_connect(handle,&nbsp;<span class="cpp_text">"127.0.0.1"</span>,&nbsp;<span class="cpp_text">"feather"</span>,&nbsp;<span class="cpp_text">"2018"</span>,&nbsp;<span class="cpp_text">"testdb"</span>,&nbsp;<span class="cpp_literals">0</span>,&nbsp;<span class="cpp_literals">nullptr</span>,&nbsp;<span class="cpp_literals">0</span>);</code></pre>
+      </section>
+      <p>
+        <span class="text">PostgreSQL
+          connect</span></p>
+      <section>
+        <pre><code><span class="cpp_text">PQconnectdb</span>(<span class="cpp_text">"host=localhost&nbsp;user=127.0.0.1&nbsp;password=2018&nbsp;dbname=testdb"</span>);</code></pre>
+      </section>
+      <p>
+        <span class="text">Sqlite
+          connect</span></p>
+      <section>
+        <pre><code><span class="cpp_text">sqlite3_open</span>(<span class="cpp_text">"testdb"</span>,&nbsp;handle);</code></pre>
+      </section>
+      <p>
+        <span class="text">ORM
+          unified connect interface</span></p>
+      <section>
+        <pre><code>ORM::mysql.connect(<span class="cpp_text">"127.0.0.1"</span>,&nbsp;“feathe<span class="cpp_text">r",&nbsp;“2018"</span>,&nbsp;<span class="cpp_text">"testdb"</span>);<br/>ORM::postgres.connect(<span class="cpp_text">"127.0.0.1"</span>,&nbsp;“feathe<span class="cpp_text">r",&nbsp;“2018"</span>,&nbsp;<span class="cpp_text">"testdb"</span>);<br/>ORM::sqlite.connect(<span class="cpp_text">"testdb"</span>);</code></pre>
+      </section>
+      <p>
+        <span class="text">不同的数据库的C
+          connector相同功能的接口是完全不同的，ormpp库（https://github.com/qicosmos/ormpp）要做的一件事就是要屏蔽这些接口的差异，让用户可以试用统一的接口来操作数据库，完全感受不到底层数据库的差异。</span>
+      </p>
+      <p>
+        <span class="text">元编程可以帮助我们实现这个目标，具体思路是通过可变参数模版来统一接口，通过policy-base设计和variadic
+          templates来屏蔽数据库接口差异。</span></p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;DB&gt;<br/><span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">dbng</span>{</span><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>...&nbsp;Args&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">bool</span>&nbsp;<span class="cpp_type_custom">connect</span><span class="cpp_operator">(Args&amp;&amp;...&nbsp;args)</span></span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;&nbsp;db_.connect(<span class="cpp_keyword">std</span>::forward&lt;Args&gt;(args)...);<br/>}<br/><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>...&nbsp;Args&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">bool</span>&nbsp;<span class="cpp_type_custom">connect</span><span class="cpp_operator">(Args...&nbsp;args)</span>&nbsp;</span>{<br/><span class="cpp_keyword"><span class="cpp_type_builtin">if</span>&nbsp;<span class="cpp_type_custom">constexpr</span>&nbsp;<span class="cpp_operator">(<span class="cpp_keyword">sizeof</span>...(Args)</span></span>==<span class="cpp_literals">5</span>)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;<span class="cpp_keyword">std</span>::apply(&amp;mysql_real_connect,&nbsp;<span class="cpp_keyword">std</span>::make_tuple(args...);<br/>}<br/><span class="cpp_keyword">else</span>&nbsp;<span class="cpp_keyword">if</span>&nbsp;<span class="cpp_keyword">constexpr</span>&nbsp;(<span class="cpp_keyword">sizeof</span>...(Args)&nbsp;==&nbsp;<span class="cpp_literals">4</span>)&nbsp;{<span class="cpp_comment">//postgresql}</span><br/><span class="cpp_keyword">else</span>&nbsp;<span class="cpp_keyword">if</span>&nbsp;<span class="cpp_keyword">constexpr</span>&nbsp;(<span class="cpp_keyword">sizeof</span>...(Args)&nbsp;==&nbsp;<span class="cpp_literals">2</span>)&nbsp;{<span class="cpp_comment">//sqlite}</span><br/>}</code></pre>
+      </section>
+      <p>
+        <span class="text">这里通过connect(Args...
+          args)统一连接数据库的接口，然后再connect内部通过if constexpr和变参来选择不同的分支。if
+          constexpr加variadic templates等于静态多态，这是C++17给我们提供的一种新的实现静态多态方法。</span></p>
+      <p>
+        <span class="text">这样的好处是可以通过增加参数或修改参数类型方式来扩展接口，没有继承，没有SFINAE，没有模版特化，简单直接。</span>
+      </p>
+      <p>
+        <br></p>
+      <p class="title_1">
+        <span><strong><span>消除重复（宏）</span></strong></span>
+      </p>
+      <p>
+        <br></p>
+      <p>
+        <span
+          class="text">很多人喜欢用宏来减少手写重复的代码，比如下面这个例子，如果对每个枚举类型都写一个写到输出流里的代码段，是重复而繁琐的，于是就通过一个宏来消除这些重复代码（事实上，这些重复代码仍然会生成，只不过由编译器帮助生成了）。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_operator_hashtag">#<span class="cpp_operator_stream">define</span>&nbsp;ENUM_TO_OSTREAM_FUNC(EnumType)&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::ostream&amp;&nbsp;operator&lt;&lt;(std::ostream&amp;&nbsp;out_stream,&nbsp;const&nbsp;EnumType&amp;&nbsp;x)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out_stream&nbsp;<span class="cpp_operator_stream">&lt;&lt;&nbsp;static_cast&lt;int&gt;(x);&nbsp;&nbsp;&nbsp;&nbsp;\</span></span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;out_stream;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/><br/><span class="cpp_keyword">enum</span>&nbsp;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">MsgType</span>&nbsp;{</span>&nbsp;Connected,&nbsp;Timeout&nbsp;};<br/><span class="cpp_keyword">enum</span>&nbsp;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">DataType</span>&nbsp;{</span>Float,&nbsp;Int32};<br/>ENUM_TO_OSTREAM_FUNC(MsgType);<br/>ENUM_TO_OSTREAM_FUNC(DataType);</code></pre>
+      </section>
+      <p>
+        <span class="text">这看似是使用宏的合适场景，但是宏最大的问题是代码无法调试，代码的易读性差，但是用元编程，我们不用写这个宏了，也不用去写宏定义了。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;T,&nbsp;<span class="cpp_keyword">typename</span>&nbsp;=&nbsp;<br/><span class="cpp_keyword">typename</span>&nbsp;<span class="cpp_keyword">std</span>::enable_if&lt;<span class="cpp_keyword">std</span>::is_enum&lt;T&gt;::value&gt;::type&gt;<br/><span class="cpp_keyword">std</span>::ostream&amp;&nbsp;<span class="cpp_keyword">operator</span>&lt;&lt;(<span class="cpp_keyword">std</span>::ostream&amp;&nbsp;out_stream,&nbsp;T&nbsp;x)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;out_stream&nbsp;&lt;&lt;&nbsp;<span class="cpp_keyword">static_cast</span>&lt;<span class="cpp_keyword">int</span>&gt;(x);<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;out_stream;<br/>}</code></pre>
+      </section>
+      <p>
+        <span class="text">元编程比宏更好地解决了问题。</span>
+      </p>
+      <p>
+        <span class="text">再看一个宏的例子：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_operator_hashtag">#define&nbsp;CALL(name,&nbsp;...)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">do</span>&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result&nbsp;ret&nbsp;=&nbsp;func(name);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">if</span>&nbsp;(ret&nbsp;==&nbsp;<span class="cpp_literals">0</span>)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__VA_ARGS__;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do_something(name);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">else</span>&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do_something&nbsp;(name);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="cpp_keyword">while</span>&nbsp;(<span class="cpp_literals">0</span>)<br/><br/><span class="cpp_keyword">CALL</span>(<span class="cpp_text">"root"</span>,&nbsp;func1(root_path));<br/><span class="cpp_keyword">CALL</span>(<span class="cpp_text">"temp"</span>,&nbsp;func2(temp_path));</code></pre>
+      </section>
+      <p>
+        <span
+          class="text">这也是宏使用的一个典型场景——复用代码段。当很多代码段都是类似的时候，只有一点点代码不同，那么就可以通过宏来避免手写这些重复代码。上面这个宏把不同的代码段func1(rootpath)，func2(temppath)作为参数传进来，从而复用这个代码段。</span>
+      </p>
+      <p>
+        <span class="text">我们可以通过一个泛型函数来替换这个宏：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;Self,&nbsp;<span class="cpp_keyword">typename</span>&nbsp;F&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">Call</span><span class="cpp_operator">(<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&amp;&nbsp;name,&nbsp;Self&nbsp;*&nbsp;self,&nbsp;F&nbsp;f)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">auto</span>&nbsp;ret&nbsp;=&nbsp;foo(name);<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">if</span>&nbsp;(ret&nbsp;==&nbsp;<span class="cpp_literals">0</span>)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(self&nbsp;&gt;*f)(name);<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do_something(name);<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">else</span>&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;do_something(name);<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>}</code></pre>
+      </section>
+      <p>
+        <span class="text">事实上大部分宏能做的，元编程能做得更好、更完美！</span>
+      </p>
+      <p>
+        <br></p>
+      <p class="title_1">
+        <span><strong><span>接口易用和灵活性</span></strong></span>
+      </p>
+      <p>
+        <br></p>
+      <p>
+        <span class="text">还是以rest_rpc为例，我们可以注册任意类型的RPC函数，不管参数个数和类型是否相同、返回类型是否相同，这让我们的注册接口非常易用和灵活。</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">dummy</span>{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">int</span>&nbsp;<span class="cpp_type_custom">add</span><span class="cpp_operator">(connection*&nbsp;conn,&nbsp;<span class="cpp_keyword">int</span>&nbsp;a,&nbsp;<span class="cpp_keyword">int</span>&nbsp;b)</span>&nbsp;</span>{&nbsp;<span class="cpp_keyword">return</span>&nbsp;a&nbsp;+&nbsp;b;&nbsp;}<br/>};<br/><br/><span class="cpp_keyword"><span class="cpp_type_builtin">int</span>&nbsp;<span class="cpp_type_custom">add</span><span class="cpp_operator">(connection*&nbsp;conn,&nbsp;<span class="cpp_keyword">int</span>&nbsp;a,&nbsp;<span class="cpp_keyword">int</span>&nbsp;b)</span>&nbsp;</span>{&nbsp;<span class="cpp_keyword">return</span>&nbsp;a&nbsp;+&nbsp;b;&nbsp;}<br/><br/><span class="cpp_keyword">rpc_server&nbsp;<span class="cpp_type_custom">server</span><span class="cpp_operator">(<span class="cpp_literals">8080</span>,&nbsp;<span class="cpp_literals">4</span>)</span></span>;<br/><br/>dummy&nbsp;d;<br/>server.register_handler(<span class="cpp_text">"a"</span>,&nbsp;&amp;dummy::add,&nbsp;&amp;d);<br/>server.register_handler(<span class="cpp_text">"b"</span>,&nbsp;add);<br/>server.register_handler(<span class="cpp_text">"c"</span>,&nbsp;[](connection*&nbsp;conn)&nbsp;{});<br/>server.register_handler(<span class="cpp_text">"d"</span>,&nbsp;[](connection*&nbsp;conn,&nbsp;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&nbsp;s)&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;s;<br/>});</code></pre>
+      </section>
+      <p>
+        <span class="text">这里我们使用元编程帮我们擦除了函数类型：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;Function&nbsp;&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">register_nonmember_func</span><span class="cpp_operator">(<span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&nbsp;<span class="cpp_keyword">const</span>&amp;&nbsp;name,&nbsp;<span class="cpp_keyword">const</span>&nbsp;Function&amp;&nbsp;f)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">this</span>-&gt;map_invokers_[name]&nbsp;=&nbsp;{&nbsp;<span class="cpp_keyword">std</span>::bind(&amp;invoker&lt;Function&gt;::apply,&nbsp;f,<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::placeholders::_1,&nbsp;<span class="cpp_keyword">std</span>::placeholders::_2,&nbsp;<span class="cpp_keyword">std</span>::placeholders::_3)&nbsp;};<br/>}<br/><br/><span class="cpp_keyword">template</span>&lt;<span class="cpp_keyword">typename</span>&nbsp;Function&gt;<br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">invoker</span>&nbsp;{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">static</span>&nbsp;<span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">apply</span><span class="cpp_operator">(<span class="cpp_keyword">const</span>&nbsp;Function&amp;&nbsp;func,&nbsp;<span class="cpp_keyword">const</span>&nbsp;<span class="cpp_keyword">char</span>*&nbsp;data,&nbsp;<span class="cpp_keyword">size_t</span>&nbsp;size,<br/><span class="cpp_keyword">std</span>::<span class="cpp_keyword">string</span>&amp;&nbsp;result)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">using</span>&nbsp;args_tuple&nbsp;=&nbsp;<span class="cpp_keyword">typename</span>&nbsp;function_traits&lt;Function&gt;::args_tuple;<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;msgpack_codec&nbsp;codec;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">auto</span>&nbsp;tp&nbsp;=&nbsp;codec.unpack&lt;args_tuple&gt;(data,&nbsp;size);<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;call(func,&nbsp;result,&nbsp;tp);<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>};</code></pre>
+      </section>
+      <p>
+        <span class="text">typename
+          Function做了类型擦除，typename functiontraits::argstuple帮我们还原了类型。</span></p>
+      <p>
+        <span class="text">再来看另外一个例子，cinatra（https://github.com/qicosmos/cinatra）注册路由函数的例子:</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">server</span>.set_http_handler&lt;<span class="cpp_keyword">GET</span>&gt;(<span class="cpp_text">"/a"</span>,&nbsp;&amp;person::foo);<br/><br/><span class="cpp_keyword">server</span>.set_http_handler&lt;<span class="cpp_keyword">GET</span>,&nbsp;POST&gt;(<span class="cpp_text">"/b"</span>,&nbsp;&amp;person::foo,&nbsp;log_t{});<br/><br/><span class="cpp_keyword">server</span>.set_http_handler&lt;<span class="cpp_keyword">GET</span>,&nbsp;POST,&nbsp;HEAD&gt;(<span class="cpp_text">"/c"</span>,&nbsp;&amp;person::foo,&nbsp;log_t{},&nbsp;check{});<br/><br/><span class="cpp_keyword">server</span>.set_http_handler&lt;<span class="cpp_keyword">GET</span>&gt;(<span class="cpp_text">"/d"</span>,&nbsp;&amp;person::foo,&nbsp;log_t{},&nbsp;check{},&nbsp;enable_cache{&nbsp;<span class="cpp_literals">false</span>&nbsp;});<br/><br/><span class="cpp_keyword">server</span>.set_http_handler&lt;<span class="cpp_keyword">GET</span>&gt;(<span class="cpp_text">"/e"</span>,&nbsp;&amp;person::foo,&nbsp;log_t{},&nbsp;enable_cache{&nbsp;<span class="cpp_literals">false</span>&nbsp;},&nbsp;check{});<br/><br/><span class="cpp_keyword">server</span>.set_http_handler&lt;POST&gt;(<span class="cpp_text">"/f"</span>,&nbsp;&amp;person::foo,&nbsp;enable_cache{&nbsp;<span class="cpp_literals">false</span>&nbsp;},&nbsp;log_t{},&nbsp;check{});</code></pre>
+      </section>
+      <p>
+        <span class="text">这个例子中，用户可以增加任意切面，还可以增加缓存参数，切面和缓存参数的顺序可以是任意的，这样完全消除了用户使用接口时需需要注意参数顺序的负担，完全是自由灵活的。</span><span
+          class="text">这里并没有使用多个重载函数做这个事情，而是借助元编程，把缓存参数过滤出来，这样就可以无视外面传入参数的顺序了。</span>
+      </p>
+      <p>
+        <span class="text">过滤参数的代码如下：</span>
+      </p>
+      <section>
+        <pre><code><span class="cpp_keyword">template</span>&lt;http_method...&nbsp;Is,&nbsp;<span class="cpp_keyword">typename</span>&nbsp;Function,&nbsp;<span class="cpp_keyword">typename</span>...&nbsp;AP&gt;<br/><span class="cpp_keyword"><span class="cpp_type_builtin">void</span>&nbsp;<span class="cpp_type_custom">set_http_handler</span><span class="cpp_operator">(<span class="cpp_keyword">std</span>::string_view&nbsp;name,&nbsp;Function&amp;&amp;&nbsp;f,&nbsp;AP&amp;&amp;...&nbsp;ap)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">if</span>&nbsp;<span class="cpp_type_custom">constexpr</span><span class="cpp_operator">(has_type&lt;enable_cache&lt;<span class="cpp_keyword">bool</span>&gt;,&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::tuple&lt;<span class="cpp_keyword">std</span>::<span class="cpp_keyword">decay_t</span>&lt;AP&gt;...&gt;&gt;::value)</span>&nbsp;</span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">auto</span>&nbsp;tp&nbsp;=&nbsp;filter&lt;enable_cache&lt;<span class="cpp_keyword">bool</span>&gt;&gt;(<span class="cpp_keyword">std</span>::forward&lt;AP&gt;(ap)...);<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::apply(f,&nbsp;<span class="cpp_keyword">std</span>::move(tp));<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">else</span>&nbsp;{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http_router_.register_handler&lt;Is...&gt;(name,&nbsp;<span class="cpp_keyword">std</span>::forward&lt;Function&gt;(f),<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">std</span>::forward&lt;AP&gt;(ap)...);<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>}<br/><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T,&nbsp;<span class="cpp_keyword">typename</span>&nbsp;Tuple&gt;<br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">has_type</span>;</span><br/><br/><span class="cpp_keyword">template</span>&nbsp;&lt;<span class="cpp_keyword">typename</span>&nbsp;T,&nbsp;<span class="cpp_keyword">typename</span>...&nbsp;Us&gt;<br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">has_type</span>&lt;T,&nbsp;std::tuple&lt;Us...&gt;&gt;&nbsp;:</span>&nbsp;<span class="cpp_keyword">std</span>::disjunction&lt;<span class="cpp_keyword">std</span>::is_same&lt;T,&nbsp;Us&gt;...&gt;&nbsp;{};<br/><br/><span class="cpp_keyword">template</span>&lt;&nbsp;<span class="cpp_keyword">typename</span>&nbsp;T&gt;<br/><span class="cpp_keyword_class">struct</span>&nbsp;<span class="cpp_type_custom">filter_helper</span>{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword"><span class="cpp_type_builtin">static</span>&nbsp;<span class="cpp_type_builtin">constexpr</span>&nbsp;<span class="cpp_type_builtin">auto</span>&nbsp;<span class="cpp_type_custom">func</span><span class="cpp_operator">()</span></span>{<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;<span class="cpp_keyword">std</span>::tuple&lt;&gt;();<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;&nbsp;<span class="cpp_keyword_class">class</span>...&nbsp;<span class="cpp_type_custom">Args</span>&nbsp;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">static</span>&nbsp;<span class="cpp_type_custom">constexpr</span>&nbsp;<span class="cpp_type_custom">auto</span>&nbsp;<span class="cpp_type_custom">func</span>(<span class="cpp_type_custom">T</span>&amp;&amp;,&nbsp;<span class="cpp_type_custom">Args</span>&amp;&amp;...<span class="cpp_type_custom">args</span>){</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;filter_helper::func(<span class="cpp_keyword">std</span>::forward&lt;Args&gt;(args)...);<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">template</span>&lt;&nbsp;<span class="cpp_keyword_class">class</span>&nbsp;<span class="cpp_type_custom">X</span>,&nbsp;<span class="cpp_type_custom">class</span>...&nbsp;<span class="cpp_type_custom">Args</span>&nbsp;&gt;<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_type_custom">static</span>&nbsp;<span class="cpp_type_custom">constexpr</span>&nbsp;<span class="cpp_type_custom">auto</span>&nbsp;<span class="cpp_type_custom">func</span>(<span class="cpp_type_custom">X</span>&amp;&amp;<span class="cpp_type_custom">x</span>,&nbsp;<span class="cpp_type_custom">Args</span>&amp;&amp;...<span class="cpp_type_custom">args</span>){</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cpp_keyword">return</span>&nbsp;<span class="cpp_keyword">std</span>::tuple_cat(<span class="cpp_keyword">std</span>::make_tuple(<span class="cpp_keyword">std</span>::forward&lt;X&gt;(x)),<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter_helper::func(<span class="cpp_keyword">std</span>::forward&lt;Args&gt;(args)...));<br/>&nbsp;&nbsp;&nbsp;&nbsp;}<br/>};</code></pre>
+      </section>
+      <p>
+        <span class="text">这里通过C++17的std::disjunction来判断是否存在某个类型，通过if
+          constexpr实现编译期选择。</span></p>
+      <p>
+        <span
+          style="max-width: 100%; letter-spacing: 0.544px; font-size: 15px; color: rgb(255, 0, 0); box-sizing: border-box !important; overflow-wrap: break-word !important;"><br></span>
+      </p>
+      <p class="title_1">
+        <span><strong><span>总结</span></strong></span>
+      </p>
+      <p>
+        <br></p>
+      <p>
+        <span
+          class="text">C++新标准给元编程带来了巨大的改变，不仅仅让元编程变得简单好写了，还让它变得更加强大了，帮助我们优雅地解决了很多实际的问题。文中列举到的元编程应用仅仅是冰山一角，还有很多其他方面的应用。</span>
+      </p>
+      <p>
+        <span class="text"><br></span>
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>bind.html</title>
+    <style>
+      body,
+      html {
+        background-color: #272822;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        line-height:24px;
+      }
+      pre {
+        margin: 0;
+        padding: 0;
+      }
+      #linenums {
+        width: 60px;
+        position: absolute;
+        background-color: #38284e;
+        -webkit-user-select:none;/*webkit浏览器*/
+        -ms-user-select:none;/*IE10*/
+        user-select:none;
+      }
+      #linenums span {
+        width: 60px;
+        display: inline-block;
+        position: relative;
+        left: -6px;
+      }
+      #codes {
+        position: absolute;
+        min-width: calc(100% - 66px);
+        width: max-content;
+        margin-left: 64px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="linenums">
+      <div style="font-family:Consolas;font-size:24px;color:gainsboro;">      <span style="color:#4dc742; text-align:right">1</span>
+      <span style="color:#4dc742; text-align:right">2</span>
+      <span style="color:#4dc742; text-align:right">3</span>
+      <span style="color:#4dc742; text-align:right">4</span>
+      <span style="color:#4dc742; text-align:right">5</span>
+      <span style="color:#4dc742; text-align:right">6</span>
+      <span style="color:#4dc742; text-align:right">7</span>
+      <span style="color:#4dc742; text-align:right">8</span>
+      <span style="color:#4dc742; text-align:right">9</span>
+      <span style="color:#4dc742; text-align:right">10</span>
+      <span style="color:#4dc742; text-align:right">11</span>
+      <span style="color:#4dc742; text-align:right">12</span>
+      <span style="color:#4dc742; text-align:right">13</span>
+      <span style="color:#4dc742; text-align:right">14</span>
+      <span style="color:#4dc742; text-align:right">15</span>
+      <span style="color:#4dc742; text-align:right">16</span>
+      <span style="color:#4dc742; text-align:right">17</span>
+      <span style="color:#4dc742; text-align:right">18</span>
+      <span style="color:#4dc742; text-align:right">19</span>
+      <span style="color:#4dc742; text-align:right">20</span>
+      <span style="color:#4dc742; text-align:right">21</span>
+      <span style="color:#4dc742; text-align:right">22</span>
+      <span style="color:#4dc742; text-align:right">23</span>
+      <span style="color:#4dc742; text-align:right">24</span>
+      <span style="color:#4dc742; text-align:right">25</span>
+      <span style="color:#4dc742; text-align:right">26</span>
+      <span style="color:#4dc742; text-align:right">27</span>
+      <span style="color:#4dc742; text-align:right">28</span>
+      <span style="color:#4dc742; text-align:right">29</span>
+      <span style="color:#4dc742; text-align:right">30</span>
+      <span style="color:#4dc742; text-align:right">31</span>
+      <span style="color:#4dc742; text-align:right">32</span>
+      <span style="color:#4dc742; text-align:right">33</span>
+      <span style="color:#4dc742; text-align:right">34</span>
+      <span style="color:#4dc742; text-align:right">35</span>
+      <span style="color:#4dc742; text-align:right">36</span>
+      <span style="color:#4dc742; text-align:right">37</span>
+      <span style="color:#4dc742; text-align:right">38</span>
+      <span style="color:#4dc742; text-align:right">39</span>
+      <span style="color:#4dc742; text-align:right">40</span>
+      <span style="color:#4dc742; text-align:right">41</span>
+      <span style="color:#4dc742; text-align:right">42</span>
+      <span style="color:#4dc742; text-align:right">43</span>
+      </div>
+    </div>
+    <div id="codes">
+      <pre style="font-family:Consolas;font-size:24px;color:gainsboro;background:#1e1e1e;"><span style="color:#57a64a;">//&nbsp;绑定参数</span><br/><span style="color:#569cd6;">bool</span>&nbsp;<span style="color:#ff8000;">bigerThan</span><span style="color:#b4b4b4;">(</span><span style="color:#569cd6;">int</span>&nbsp;<span style="color:gold;">l</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#569cd6;">int</span>&nbsp;<span style="color:darkkhaki;">r</span><span style="color:#b4b4b4;">)</span><br/><span style="color:#b4b4b4;">{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">return</span>&nbsp;<span style="color:gold;">l</span>&nbsp;<span style="color:#b4b4b4;">&gt;</span>&nbsp;<span style="color:darkkhaki;">r</span><span style="color:#b4b4b4;">;</span><br/><span style="color:#b4b4b4;">}</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">isPositive</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">bind</span><span style="color:#b4b4b4;">(</span><span style="color:#ff8000;">bigerThan</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">placeholders</span><span style="color:#b4b4b4;">::</span><span style="color:darkkhaki;">_1</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#b5cea8;">0</span><span style="color:#b4b4b4;">);</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">isNegitive</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">bind</span><span style="color:#b4b4b4;">(</span><span style="color:#ff8000;">bigerThan</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#b5cea8;">0</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">placeholders</span><span style="color:#b4b4b4;">::</span><span style="color:darkkhaki;">_1</span><span style="color:#b4b4b4;">);</span><br/> <br/><span style="color:#57a64a;">//&nbsp;交换参数</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">lowerThan</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">bind</span><span style="color:#b4b4b4;">(</span><span style="color:#ff8000;">bigerThan</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">placeholders</span><span style="color:#b4b4b4;">::</span><span style="color:darkkhaki;">_2</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">placeholders</span><span style="color:#b4b4b4;">::</span><span style="color:darkkhaki;">_1</span><span style="color:#b4b4b4;">);</span><br/> <br/><span style="color:#57a64a;">//&nbsp;绑定类成员函数</span><br/><span style="color:#569cd6;">class</span>&nbsp;<span style="color:gold;">Book</span><br/><span style="color:#b4b4b4;">{</span><br/><span style="color:#569cd6;">public</span><span style="color:#b4b4b4;">:</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:gold;">Book</span><span style="color:#b4b4b4;">(</span><span style="color:#569cd6;">const</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">string</span><span style="color:#b4b4b4;">&amp;</span>&nbsp;<span style="color:darkkhaki;">name</span><span style="color:#b4b4b4;">)</span>&nbsp;<span style="color:#b4b4b4;">{}</span><br/><span style="color:#569cd6;">public</span><span style="color:#b4b4b4;">:</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:gold;">size_t</span>&nbsp;<span style="color:#ff8000;">read</span><span style="color:#b4b4b4;">(</span><span style="color:gold;">size_t</span>&nbsp;<span style="color:darkkhaki;">pages</span><span style="color:#b4b4b4;">)</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#57a64a;">//some&nbsp;code&nbsp;blocks</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">}</span><br/><span style="color:#b4b4b4;">};</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">hp_book</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">Book</span><span style="color:#b4b4b4;">(</span><span style="color:#d69d85;">&#39;Harry&nbsp;Poter&#39;</span><span style="color:#b4b4b4;">);</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">readHarryPoter</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">bind</span><span style="color:#b4b4b4;">(&amp;</span><span style="color:gold;">Book</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">read</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#b4b4b4;">&amp;</span><span style="color:darkkhaki;">hp_book</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">placeholders</span><span style="color:#b4b4b4;">::</span><span style="color:darkkhaki;">_1</span><span style="color:#b4b4b4;">);</span><br/> <br/><span style="color:#57a64a;">//&nbsp;传递引用</span><br/><span style="color:#569cd6;">void</span>&nbsp;<span style="color:#ff8000;">fillVectorSequence</span><span style="color:#b4b4b4;">(</span><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">vector</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">int</span><span style="color:#b4b4b4;">&gt;&amp;</span>&nbsp;<span style="color:darkkhaki;">v</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#569cd6;">int</span>&nbsp;<span style="color:darkkhaki;">n</span><span style="color:#b4b4b4;">)</span><br/><span style="color:#b4b4b4;">{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:darkkhaki;">v</span><span style="color:#b4b4b4;">.</span><span style="color:#ff8000;">resize</span><span style="color:#b4b4b4;">(</span><span style="color:darkkhaki;">n</span><span style="color:#b4b4b4;">);</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">for</span>&nbsp;<span style="color:#b4b4b4;">(</span><span style="color:gold;">size_t</span>&nbsp;<span style="color:darkkhaki;">i</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">0</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:darkkhaki;">i</span>&nbsp;<span style="color:#b4b4b4;">&lt;</span>&nbsp;<span style="color:#b5cea8;">100</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#b4b4b4;">++</span><span style="color:darkkhaki;">i</span><span style="color:#b4b4b4;">)</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:darkkhaki;">v</span><span style="color:#b4b4b4;">[</span><span style="color:darkkhaki;">i</span><span style="color:#b4b4b4;">]</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">i</span><span style="color:#b4b4b4;">;</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">}</span><br/><span style="color:#b4b4b4;">}</span><br/><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">vector</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">int</span><span style="color:#b4b4b4;">&gt;</span>&nbsp;<span style="color:darkkhaki;">my_vct</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b4b4b4;">{};</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">fillMyVctSequence</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">bind</span><span style="color:#b4b4b4;">(</span><span style="color:#ff8000;">fillVectorSequence</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">ref</span><span style="color:#b4b4b4;">(</span><span style="color:darkkhaki;">my_vct</span><span style="color:#b4b4b4;">)</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">placeholders</span><span style="color:#b4b4b4;">::</span><span style="color:darkkhaki;">_1</span><span style="color:#b4b4b4;">);</span><br/> <br/><span style="color:#57a64a;">//&nbsp;关联-std::mem_fn</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">readBook</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">mem_fn</span><span style="color:#b4b4b4;">(&amp;</span><span style="color:gold;">Book</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">read</span><span style="color:#b4b4b4;">);</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">newPage</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">readBook</span><span style="color:#b4b4b4;">(</span>my_book<span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:#b5cea8;">10</span><span style="color:#b4b4b4;">);</span><br/></pre>
+    </div>
+  </body>
+</html>

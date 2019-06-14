@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>cross_plat_1.html</title>
+    <style>
+      body,
+      html {
+        background-color: #272822;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        line-height:24px;
+      }
+      pre {
+        margin: 0;
+        padding: 0;
+      }
+      #linenums {
+        width: 60px;
+        position: absolute;
+        background-color: #38284e;
+        -webkit-user-select:none;/*webkit浏览器*/
+        -ms-user-select:none;/*IE10*/
+        user-select:none;
+      }
+      #linenums span {
+        width: 60px;
+        display: inline-block;
+        position: relative;
+        left: -6px;
+      }
+      #codes {
+        position: absolute;
+        min-width: calc(100% - 66px);
+        width: max-content;
+        margin-left: 64px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="linenums">
+      <div style="font-family:Consolas;font-size:24px;color:gainsboro;">      <span style="color:#4dc742; text-align:right">1</span>
+      <span style="color:#4dc742; text-align:right">2</span>
+      <span style="color:#4dc742; text-align:right">3</span>
+      <span style="color:#4dc742; text-align:right">4</span>
+      <span style="color:#4dc742; text-align:right">5</span>
+      <span style="color:#4dc742; text-align:right">6</span>
+      <span style="color:#4dc742; text-align:right">7</span>
+      <span style="color:#4dc742; text-align:right">8</span>
+      <span style="color:#4dc742; text-align:right">9</span>
+      <span style="color:#4dc742; text-align:right">10</span>
+      <span style="color:#4dc742; text-align:right">11</span>
+      <span style="color:#4dc742; text-align:right">12</span>
+      <span style="color:#4dc742; text-align:right">13</span>
+      <span style="color:#4dc742; text-align:right">14</span>
+      <span style="color:#4dc742; text-align:right">15</span>
+      <span style="color:#4dc742; text-align:right">16</span>
+      <span style="color:#4dc742; text-align:right">17</span>
+      <span style="color:#4dc742; text-align:right">18</span>
+      <span style="color:#4dc742; text-align:right">19</span>
+      <span style="color:#4dc742; text-align:right">20</span>
+      <span style="color:#4dc742; text-align:right">21</span>
+      <span style="color:#4dc742; text-align:right">22</span>
+      <span style="color:#4dc742; text-align:right">23</span>
+      <span style="color:#4dc742; text-align:right">24</span>
+      <span style="color:#4dc742; text-align:right">25</span>
+      <span style="color:#4dc742; text-align:right">26</span>
+      <span style="color:#4dc742; text-align:right">27</span>
+      <span style="color:#4dc742; text-align:right">28</span>
+      <span style="color:#4dc742; text-align:right">29</span>
+      <span style="color:#4dc742; text-align:right">30</span>
+      <span style="color:#4dc742; text-align:right">31</span>
+      <span style="color:#4dc742; text-align:right">32</span>
+      <span style="color:#4dc742; text-align:right">33</span>
+      <span style="color:#4dc742; text-align:right">34</span>
+      <span style="color:#4dc742; text-align:right">35</span>
+      <span style="color:#4dc742; text-align:right">36</span>
+      </div>
+    </div>
+    <div id="codes">
+      <pre style="font-family:Consolas;font-size:24px;color:gainsboro;background:#1e1e1e;"><span style="color:#57a64a;">//1.//////////////////////////////////////////////////////</span><br/><span style="color:#569cd6;">using</span>&nbsp;<span style="color:gold;">nanoseconds</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">duration</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">long</span>&nbsp;<span style="color:#569cd6;">long</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">nano</span><span style="color:#b4b4b4;">&gt;;</span><br/><span style="color:#569cd6;">using</span>&nbsp;<span style="color:gold;">microseconds</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">duration</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">long</span>&nbsp;<span style="color:#569cd6;">long</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">micro</span><span style="color:#b4b4b4;">&gt;;</span><br/><span style="color:#569cd6;">using</span>&nbsp;<span style="color:gold;">milliseconds</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">duration</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">long</span>&nbsp;<span style="color:#569cd6;">long</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">milli</span><span style="color:#b4b4b4;">&gt;;</span><br/><span style="color:#569cd6;">using</span>&nbsp;<span style="color:gold;">seconds</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">duration</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">long</span>&nbsp;<span style="color:#569cd6;">long</span><span style="color:#b4b4b4;">&gt;;</span><br/><span style="color:#569cd6;">using</span>&nbsp;<span style="color:gold;">minutes</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">duration</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">int</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">ratio</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#b5cea8;">60</span><span style="color:#b4b4b4;">&gt;&gt;;</span><br/><span style="color:#569cd6;">using</span>&nbsp;<span style="color:gold;">hours</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">duration</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">int</span><span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">ratio</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#b5cea8;">3600</span><span style="color:#b4b4b4;">&gt;&gt;;</span><br/> <br/><span style="color:#57a64a;">//2.//////////////////////////////////////////////////////</span><br/><span style="color:#9b9b9b;">#include</span>&nbsp;<span style="color:#d69d85;">&lt;chrono&gt;</span><br/> <br/><span style="color:#569cd6;">using</span>&nbsp;<span style="color:#569cd6;">namespace</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">literals</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono_literals</span><span style="color:#b4b4b4;">;</span><br/> <br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">d1</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">1</span>s<span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#57a64a;">//1秒&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;=&gt;&nbsp;std::chrono::seconds(1);</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">d2</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">3</span>min<span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#57a64a;">//3分钟&nbsp;&lt;=&gt;&nbsp;std::chrono::minutes(3);</span><br/> <br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">d3</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">duration_cast</span><span style="color:#b4b4b4;">&lt;</span><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">seconds</span><span style="color:#b4b4b4;">&gt;(</span><span style="color:darkkhaki;">d2</span><span style="color:#b4b4b4;">);</span>&nbsp;<span style="color:#57a64a;">//&nbsp;180s</span><br/><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">milliseconds</span>&nbsp;<span style="color:darkkhaki;">d4</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">d2</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;180000ms</span><br/> <br/><span style="color:#569cd6;">bool</span>&nbsp;<span style="color:darkkhaki;">b1</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">d3</span>&nbsp;<span style="color:#b4b4b4;">==</span>&nbsp;<span style="color:darkkhaki;">d2</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;true</span><br/><span style="color:#569cd6;">bool</span>&nbsp;<span style="color:darkkhaki;">b2</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">is_same</span><span style="color:#b4b4b4;">&lt;</span><span style="color:#569cd6;">decltype</span><span style="color:#b4b4b4;">(</span><span style="color:darkkhaki;">d1</span><span style="color:#b4b4b4;">),</span>&nbsp;<span style="color:#569cd6;">decltype</span><span style="color:#b4b4b4;">(</span><span style="color:darkkhaki;">d3</span><span style="color:#b4b4b4;">)&gt;::</span><span style="color:darkkhaki;">value</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;true</span><br/> <br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:gold;">t1</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">system_clock</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">time_point</span><span style="color:#b4b4b4;">(</span><span style="color:#b5cea8;">60</span>s<span style="color:#b4b4b4;">);</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">t2</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">time_point_cast</span><span style="color:#b4b4b4;">&lt;</span><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">minutes</span><span style="color:#b4b4b4;">&gt;(</span><span style="color:gold;">t1</span><span style="color:#b4b4b4;">);</span><br/> <br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">t3</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">steady_clock</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">now</span><span style="color:#b4b4b4;">();</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">t4</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">t3</span>&nbsp;<span style="color:#b4b4b4;">+</span>&nbsp;<span style="color:#b5cea8;">1</span>min<span style="color:#b4b4b4;">;</span><br/><span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">d5</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:darkkhaki;">t3</span><span style="color:#b4b4b4;">.</span><span style="color:#ff8000;">time_since_epoch</span><span style="color:#b4b4b4;">();</span>&nbsp;<span style="color:#57a64a;">//&nbsp;换算时间点距离起点的duration</span><br/> <br/><span style="color:#569cd6;">bool</span>&nbsp;<span style="color:darkkhaki;">b3</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">is_same</span><span style="color:#b4b4b4;">&lt;</span><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">high_resolution_clock</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">system_clock</span><span style="color:#b4b4b4;">&gt;::</span><span style="color:darkkhaki;">value</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;gcc&nbsp;true</span><br/><span style="color:#569cd6;">bool</span>&nbsp;<span style="color:darkkhaki;">b4</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">is_same</span><span style="color:#b4b4b4;">&lt;</span><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">high_resolution_clock</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">,</span>&nbsp;<span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">steady_clock</span><span style="color:#b4b4b4;">&gt;::</span><span style="color:darkkhaki;">value</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#57a64a;">//&nbsp;vs&nbsp;&nbsp;true</span><br/> <br/><span style="color:#57a64a;">//3.//////////////////////////////////////////////////////</span><br/><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">this_thread</span><span style="color:#b4b4b4;">::</span><span style="color:#ff8000;">sleep_for</span><span style="color:#b4b4b4;">(</span><span style="color:gold;">std</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">chrono</span><span style="color:#b4b4b4;">::</span><span style="color:gold;">seconds</span><span style="color:#b4b4b4;">(</span><span style="color:#b5cea8;">10</span><span style="color:#b4b4b4;">));</span>&nbsp;<span style="color:#57a64a;">//&nbsp;休眠十秒</span><br/></pre>
+    </div>
+  </body>
+</html>

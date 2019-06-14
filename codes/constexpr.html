@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>constexpr.html</title>
+    <style>
+      body,
+      html {
+        background-color: #272822;
+        padding: 0;
+        margin: 0;
+        position: relative;
+        line-height:24px;
+      }
+      pre {
+        margin: 0;
+        padding: 0;
+      }
+      #linenums {
+        width: 60px;
+        position: absolute;
+        background-color: #38284e;
+        -webkit-user-select:none;/*webkit浏览器*/
+        -ms-user-select:none;/*IE10*/
+        user-select:none;
+      }
+      #linenums span {
+        width: 60px;
+        display: inline-block;
+        position: relative;
+        left: -6px;
+      }
+      #codes {
+        position: absolute;
+        min-width: calc(100% - 66px);
+        width: max-content;
+        margin-left: 64px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="linenums">
+      <div style="font-family:Consolas;font-size:24px;color:gainsboro;">
+      <span style="color:#4dc742; text-align:right">1</span>
+      <span style="color:#4dc742; text-align:right">2</span>
+      <span style="color:#4dc742; text-align:right">3</span>
+      <span style="color:#4dc742; text-align:right">4</span>
+      <span style="color:#4dc742; text-align:right">5</span>
+      <span style="color:#4dc742; text-align:right">6</span>
+      <span style="color:#4dc742; text-align:right">7</span>
+      <span style="color:#4dc742; text-align:right">8</span>
+      <span style="color:#4dc742; text-align:right">9</span>
+      <span style="color:#4dc742; text-align:right">10</span>
+      <span style="color:#4dc742; text-align:right">11</span>
+      <span style="color:#4dc742; text-align:right">12</span>
+      <span style="color:#4dc742; text-align:right">13</span>
+      <span style="color:#4dc742; text-align:right">14</span>
+      <span style="color:#4dc742; text-align:right">15</span>
+      <span style="color:#4dc742; text-align:right">16</span>
+      <span style="color:#4dc742; text-align:right">17</span>
+      <span style="color:#4dc742; text-align:right">18</span>
+      <span style="color:#4dc742; text-align:right">19</span>
+      <span style="color:#4dc742; text-align:right">20</span>
+      <span style="color:#4dc742; text-align:right">21</span>
+      <span style="color:#4dc742; text-align:right">22</span>
+      <span style="color:#4dc742; text-align:right">23</span>
+      <span style="color:#4dc742; text-align:right">24</span>
+      <span style="color:#4dc742; text-align:right">25</span>
+      <span style="color:#4dc742; text-align:right">26</span>
+      </div>
+    </div>
+    <div id="codes">
+      <pre style="font-family:Consolas;font-size:24px;color:gainsboro;background:#1e1e1e;"><span style="color:#57a64a;">//&nbsp;声明constexpr表达式</span><br/><span style="color:#569cd6;">constexpr</span>&nbsp;<span style="color:#569cd6;">int</span>&nbsp;<span style="color:darkkhaki;">num</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">10</span><span style="color:#b4b4b4;">;</span><br/><span style="color:#569cd6;">constexpr</span>&nbsp;<span style="color:gold;">size_t</span>&nbsp;<span style="color:darkkhaki;">M</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">1024</span>&nbsp;<span style="color:#b4b4b4;">*</span>&nbsp;<span style="color:#b5cea8;">1024</span><span style="color:#b4b4b4;">;</span><br/> <br/><span style="color:#57a64a;">//&nbsp;声明返回constexpr的函数</span><br/><span style="color:#569cd6;">constexpr</span>&nbsp;<span style="color:#569cd6;">int</span>&nbsp;<span style="color:#ff8000;">accumulation</span><span style="color:#b4b4b4;">(</span><span style="color:#569cd6;">int</span>&nbsp;<span style="color:darkkhaki;">num</span><span style="color:#b4b4b4;">)</span><br/><span style="color:#b4b4b4;">{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">int</span>&nbsp;<span style="color:darkkhaki;">ret</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">0</span><span style="color:#b4b4b4;">;</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">for</span>&nbsp;<span style="color:#b4b4b4;">(</span><span style="color:#569cd6;">int</span>&nbsp;<span style="color:darkkhaki;">i</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#b5cea8;">1</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:darkkhaki;">i</span>&nbsp;<span style="color:#b4b4b4;">&lt;=</span>&nbsp;<span style="color:darkkhaki;">num</span><span style="color:#b4b4b4;">;</span>&nbsp;<span style="color:#b4b4b4;">++</span><span style="color:darkkhaki;">i</span><span style="color:#b4b4b4;">)</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:darkkhaki;">ret</span>&nbsp;<span style="color:#b4b4b4;">+=</span>&nbsp;<span style="color:darkkhaki;">i</span><span style="color:#b4b4b4;">;</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#b4b4b4;">}</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">return</span>&nbsp;<span style="color:darkkhaki;">ret</span><span style="color:#b4b4b4;">;</span><br/><span style="color:#b4b4b4;">}</span><br/><span style="color:#569cd6;">constexpr</span>&nbsp;<span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">x</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#ff8000;">accumulation</span><span style="color:#b4b4b4;">(</span><span style="color:#b5cea8;">100</span><span style="color:#b4b4b4;">);</span><br/> <br/><span style="color:#57a64a;">//&nbsp;声明返回constexpr的函数的错误用例</span><br/><span style="color:#9b9b9b;">#include</span>&nbsp;<span style="color:#d69d85;">&lt;time.h&gt;</span><br/><span style="color:#569cd6;">constexpr</span>&nbsp;<span style="color:gold;">time_t</span>&nbsp;<span style="color:#ff8000;">now_ts</span><span style="color:#b4b4b4;">()</span><br/><span style="color:#b4b4b4;">{</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#569cd6;">return</span>&nbsp;<span style="color:darkkhaki;">time</span><span style="color:#b4b4b4;">(</span><span style="color:#569cd6;">nullptr</span><span style="color:#b4b4b4;">);</span><br/><span style="color:#b4b4b4;">}</span><br/><span style="color:#569cd6;">constexpr</span>&nbsp;<span style="color:#569cd6;">auto</span>&nbsp;<span style="color:darkkhaki;">n</span>&nbsp;<span style="color:#b4b4b4;">=</span>&nbsp;<span style="color:#ff8000;">now_ts</span><span style="color:#b4b4b4;">();</span><br/> <br/><span style="color:#57a64a;">//编译错误：</span><br/><span style="color:#bd63c5;">error</span>&nbsp;C3615&nbsp;<span style="color:#b4b4b4;">:</span>&nbsp;<span style="color:#569cd6;">constexpr</span>&nbsp;函数&nbsp;<span style="color:#d69d85;">&quot;now_ts&quot;</span>&nbsp;不会生成常数表达式</pre>
+    </div>
+  </body>
+</html>
