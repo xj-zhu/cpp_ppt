@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>codes</title>
+  <script>
+    function GetQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]); return null;
+    }
+    /*-------------------Ajax start--------------------*/
+
+    //格式化参数
+    function formatParams(data) {
+      var arr = [];
+      for (var name in data) {
+        arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
+      }
+      arr.push(("v=" + Math.random()).replace(".", ""));
+      return arr.join("&");
+    }
+
+    function ajax(options) {
+      options = options || {};
+      options.type = (options.type || "GET").toUpperCase();
+      options.dataType = options.dataType || "json";
+      var params = formatParams(options.data);
+      var xhr;
+
+      //创建 - 第一步
+      if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+      } else if (window.ActiveObject) {         //IE6及以下
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+      }
+
+      //连接 和 发送 - 第二步
+      if (options.type == "GET") {
+        console.log(options.url + "?" + params)
+        xhr.open("GET", options.url + "?" + params, true);
+        xhr.send(null);
+      } else if (options.type == "POST") {
+        xhr.open("POST", options.url, true);
+        //设置表单提交时的内容类型
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+      }
+
+      //接收 - 第三步
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          var status = xhr.status;
+          if (status >= 200 && status < 300 || status == 304) {
+            options.success && options.success(xhr.responseText, xhr.responseXML);
+          } else {
+            options.error && options.error(status);
+          }
+        }
+      }
+    }
+
+    window.onload = function () {
+      options = {
+        url: GetQueryString("url"),
+        success: function (rt, rx) {
+          console.log(rt)
+          console.log(rx)
+          document.getElementById("code").innerHTML = rt;
+        },
+        error: function (status) {
+          console.log(status)
+        },
+      }
+      ajax(options)
+    }
+  </script>
+</head>
+
+<body>
+  <div id='code'>
+  </div>
+</body>
+
+</html>
