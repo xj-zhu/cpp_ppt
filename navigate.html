@@ -67,9 +67,10 @@
       options = {
         url: GetQueryString("url"),
         success: function (rt, rx) {
-          console.log(rt)
-          console.log(rx)
+          // console.log(rt)
+          // console.log(rx)
           document.getElementById("code").innerHTML = rt;
+          window.location.href = "#"+GetQueryString("anchor")
         },
         error: function (status) {
           console.log(status)
